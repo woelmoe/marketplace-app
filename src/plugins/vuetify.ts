@@ -5,15 +5,20 @@ import * as directives from 'vuetify/directives'
 const lightTheme = {
   dark: false,
   colors: {
-    background: '#F5F5F5',
-    surface: '#FFFFFF',
-    primary: '#1976D2',
-    secondary: '#424242',
+    // Основной фирменный цвет — фиолетовый
+    primary: '#3538d8', // Pantone 675C [citation:3][citation:5]
+    // Основной акцентный цвет — фуксия, часто используется в градиенте [citation:5][citation:7]
+    secondary: '#D81B60', // Pantone 2395C
+    // Светлые фоновые тона, которые используются в новом дизайне [citation:1][citation:4][citation:9]
+    background: '#F8F9FA', // Светлый, нейтральный фон
+    surface: '#FFFFFF', // Белый для карточек и поверхностей
+    // Остальные цвета можно оставить или адаптировать под палитру Ozon
     accent: '#FF6F00',
     error: '#D32F2F',
     info: '#0288D1',
     success: '#388E3C',
     warning: '#F57C00',
+    // Примеры оттенков для вариативности
     'primary-light': '#BBDEFB',
     'primary-dark': '#0D47A1',
   },
@@ -22,17 +27,16 @@ const lightTheme = {
 const darkTheme = {
   dark: true,
   colors: {
-    background: '#121212',
-    surface: '#1E1E1E',
-    primary: '#90CAF9',
-    secondary: '#B0BEC5',
+    background: '#121212', // Темный фон
+    surface: '#1E1E1E', // Поверхность карточек
+    primary: '#4D8BFF', // Светлый вариант Digital Blue для темной темы
+    secondary: '#FF4D80', // Светлый вариант малинового для темной темы
+    // ... остальные цвета
     accent: '#FFA726',
     error: '#EF5350',
     info: '#29B6F6',
     success: '#66BB6A',
     warning: '#FFA726',
-    'primary-light': '#1565C0',
-    'primary-dark': '#0D47A1',
   },
 }
 
@@ -45,21 +49,13 @@ export default createVuetify({
       light: lightTheme,
       dark: darkTheme,
     },
-    options: {
-      cspNonce: undefined,
-      customProperties: true, // Включает CSS-переменные для плавных переходов
-    },
   },
   defaults: {
     VBtn: {
-      variant: 'elevated',
-      rounded: 'lg',
-      height: 44,
+      variant: 'text',
+      style: 'cursor: pointer !important;',
     },
-    VCard: {
-      rounded: 'lg',
-      elevation: 2,
-    },
+    VCard: {},
     VTextField: {
       variant: 'outlined',
       density: 'comfortable',
