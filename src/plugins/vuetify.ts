@@ -45,6 +45,10 @@ export default createVuetify({
       light: lightTheme,
       dark: darkTheme,
     },
+    options: {
+      cspNonce: undefined,
+      customProperties: true, // Включает CSS-переменные для плавных переходов
+    },
   },
   defaults: {
     VBtn: {

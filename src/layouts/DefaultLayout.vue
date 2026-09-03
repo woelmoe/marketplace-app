@@ -1,41 +1,34 @@
 <template>
   <v-app>
+    <!-- Заголовок приложения -->
     <AppHeader @toggle-drawer="drawer = !drawer" />
 
-    <NavigationDrawer
-      v-model="drawer"
-      @project-selected="handleProjectSelected"
-      @logout="handleLogout"
-    />
+    <!-- Боковая панель -->
+    <SideBarNavigation v-model="drawer" />
 
+    <!-- Основной контент -->
     <v-main>
       <v-container>
         <slot />
       </v-container>
     </v-main>
 
-    <AppFooter />
+    <!-- Подвал -->
+    <v-footer app color="grey lighten-3" padless>
+      <v-row justify="center" class="py-2">
+        <span class="caption grey--text text--darken-1">
+          UX-makmet &copy; {{ new Date().getFullYear() }}
+        </span>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import AppFooter from '@/components/AppFooter/AppFooter.vue'
-import AppHeader from '@/components/AppHeader/AppHeader.vue'
-import NavigationDrawer from '@/components/NavigationDrawer/NavigationDrawer.vue'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import AppHeader from '@/components/AppHeader.vue';
+import SideBarNavigation from '@/components/SideBarNavigation.vue';
 
-const router = useRouter()
-const drawer = ref(false)
-
-const handleProjectSelected = (project: string) => {
-  console.log('Selected project:', project)
-  // Логика выбора проекта
-  drawer.value = false
-}
-
-const handleLogout = () => {
-  // Логика выхода
-  router.push('/login')
-}
+// Состояние боковой панели
+const drawer = ref(false);
 </script>
