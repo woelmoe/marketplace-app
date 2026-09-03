@@ -8,27 +8,28 @@ const lightTheme = {
     // Основной фирменный цвет — фиолетовый
     primary: '#3538d8', // Pantone 675C [citation:3][citation:5]
     // Основной акцентный цвет — фуксия, часто используется в градиенте [citation:5][citation:7]
-    secondary: '#D81B60', // Pantone 2395C
+    secondary: '#F57C00', // Pantone 2395C
     // Светлые фоновые тона, которые используются в новом дизайне [citation:1][citation:4][citation:9]
     background: '#F8F9FA', // Светлый, нейтральный фон
-    surface: '#FFFFFF', // Белый для карточек и поверхностей
+    cards: '#5a5cbd',
+    icons: '#ffffff', // Белый для карточек и поверхностей
+    'header-icons': '#ffffff',
     // Остальные цвета можно оставить или адаптировать под палитру Ozon
     accent: '#FF6F00',
     error: '#D32F2F',
     info: '#0288D1',
     success: '#388E3C',
-    warning: '#F57C00',
-    // Примеры оттенков для вариативности
-    'primary-light': '#BBDEFB',
-    'primary-dark': '#0D47A1',
+    warning: '#D81B60',
   },
 }
 
 const darkTheme = {
   dark: true,
   colors: {
-    background: '#121212', // Темный фон
-    surface: '#1E1E1E', // Поверхность карточек
+    background: '#2c293b', // Темный фон
+    cards: '#FFFFFF',
+    icons: '#b3b2b2', // Белый для карточек и поверхностей
+    'header-icons': '#ffffff',
     primary: '#4D8BFF', // Светлый вариант Digital Blue для темной темы
     secondary: '#FF4D80', // Светлый вариант малинового для темной темы
     // ... остальные цвета
@@ -55,7 +56,12 @@ export default createVuetify({
       variant: 'text',
       style: 'cursor: pointer !important;',
     },
-    VCard: {},
+    VIcon: {
+      color: 'icons',
+    },
+    VCard: {
+      color: 'cards',
+    },
     VTextField: {
       variant: 'outlined',
       density: 'comfortable',

@@ -25,6 +25,7 @@
       size="small"
       class="position-absolute top-2 right-2"
       style="z-index: 10"
+      bordered
       :color="product.isFavorite ? 'red' : 'grey-lighten-1'"
       @click="$emit('toggle-favorite', product.id)"
     ></v-btn>

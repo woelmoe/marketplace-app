@@ -21,7 +21,7 @@ import HeaderLogo from './HeaderLogo.vue'
 import HeaderSearch from './HeaderSearch.vue'
 import HeaderCartButton from './HeaderCartButton.vue'
 import HeaderProfileButton from './HeaderProfileButton.vue'
-import ThemeToggle from '../ThemeToggle/ThemeToggle.vue'
+import ThemeToggle from './ThemeToggle.vue'
 
 // Пропсы и эмиты для родителя
 defineEmits<{

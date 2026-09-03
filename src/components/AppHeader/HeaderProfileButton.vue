@@ -1,6 +1,6 @@
 <template>
   <v-btn icon small to="/profile" class="text-white">
-    <v-icon>mdi-account-circle</v-icon>
+    <v-icon color="header-icons">mdi-account-circle</v-icon>
   </v-btn>
 </template>
 
