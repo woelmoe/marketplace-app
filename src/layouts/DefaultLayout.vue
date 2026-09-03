@@ -4,7 +4,7 @@
     <AppHeader @toggle-drawer="drawer = !drawer" />
 
     <!-- Боковая панель -->
-    <SideBarNavigation v-model="drawer" />
+    <NavigationDrawer v-model="drawer" />
 
     <!-- Основной контент -->
     <v-main>
@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import AppHeader from '@/components/AppHeader.vue';
-import SideBarNavigation from '@/components/SideBarNavigation.vue';
+import { ref } from 'vue'
+import NavigationDrawer from '@/components/NavigationDrawer/NavigationDrawer.vue'
+import AppHeader from '@/components/AppHeader/AppHeader.vue'
 
 // Состояние боковой панели
-const drawer = ref(false);
+const drawer = ref(false)
 </script>
