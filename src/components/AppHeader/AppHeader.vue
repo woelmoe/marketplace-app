@@ -36,7 +36,7 @@ defineEmits<{
 
 /* Градиент, как у Wildberries */
 .gradient-background {
-  background: linear-gradient(90deg, #8e96db 0%, #3538d8 100%) !important;
+  background: linear-gradient(90deg, #8e96db 0%, #5e60ce 100%) !important;
   box-shadow: none !important;
   color: #fff; /* Белый цвет для всех иконок и текста по умолчанию */
 }
