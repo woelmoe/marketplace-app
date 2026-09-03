@@ -4,23 +4,20 @@
   </component>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-
-// Импортируем лейауты
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const route = useRoute()
 
-// Определяем какой layout использовать на основе мета-данных маршрута
+const layouts = {
+  default: DefaultLayout,
+}
+type LayoutKey = keyof typeof layouts
+
 const layout = computed(() => {
-  const layoutName = route.meta.layout || 'default'
-
-  const layouts = {
-    default: DefaultLayout,
-  }
-
+  const layoutName = (route.meta.layout as LayoutKey) || 'default'
   return layouts[layoutName] || DefaultLayout
 })
 </script>

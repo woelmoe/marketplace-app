@@ -37,54 +37,12 @@
   </v-main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-
-// Реактивные данные
-const drawer = ref(false)
-
-const projects = ref(['Games', 'Sand', 'Cinema', 'Homepage'])
-
-const subjects = ref([
-  {
-    name: 'Finley',
-    description: 'Сайт футбольного спортивного клуба',
-    price: '$150',
-  },
-  {
-    name: 'Copooler',
-    description: 'Создайте дружественный клуб',
-    price: '$250',
-  },
-  {
-    name: 'Emala hoke',
-    description: 'Создайте новый клуб для любителей хоккея',
-    price: '$130',
-  },
-])
-
-const coosing = ref([
-  'Hult Foresman',
-  'Ball',
-  '(сеть)',
-  'Fast',
-  'Stalk',
-  'Oymatsa',
-  'Zom',
-  'Numbers',
-  'Gives a Go',
-])
 
 const supportItems = ref(['FAQ', 'Контакты', 'Помощь'])
 
 const tags = ref(['Новинка', 'Популярное', 'Акция'])
-
-// Методы
-const handleBuy = (subject) => {
-  console.log('Buying:', subject.name)
-  // Здесь можно добавить логику покупки
-  alert(`Вы выбрали: ${subject.name} за ${subject.price}`)
-}
 
 // Определение имени компонента (опционально)
 defineOptions({
@@ -92,9 +50,4 @@ defineOptions({
 })
 </script>
 
-<style scoped>
-/* Минимум кастомных стилей – только для тонкой настройки, если нужно */
-.v-application {
-  background-color: #f5f7fa;
-}
-</style>
+<style scoped></style>
