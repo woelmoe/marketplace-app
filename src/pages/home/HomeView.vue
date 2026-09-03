@@ -1,51 +1,4 @@
 <template>
-  <!-- Header / Navigation -->
-  <v-app-bar color="primary" dark dense>
-    <v-app-bar-nav-icon @click="drawer = !drawer" />
-    <v-toolbar-title class="text-h6 font-weight-medium"> UX-makmet </v-toolbar-title>
-    <v-spacer />
-    <v-chip small outlined class="mr-2">МХ Навіця організації Ольга</v-chip>
-  </v-app-bar>
-
-  <!-- Sidebar Navigation Drawer -->
-  <v-navigation-drawer v-model="drawer" app temporary>
-    <v-list dense>
-      <v-subheader>Projects</v-subheader>
-      <v-list-item-group>
-        <v-list-item v-for="item in projects" :key="item">
-          <v-list-item-title>{{ item }}</v-list-item-title>
-        </v-list-item>
-      </v-list-item-group>
-
-      <v-divider class="my-2" />
-
-      <v-subheader>Subjects</v-subheader>
-      <v-list-item-group>
-        <v-list-item v-for="subject in subjects" :key="subject.name">
-          <v-list-item-content>
-            <v-list-item-title class="font-weight-medium">{{ subject.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ subject.description }}</v-list-item-subtitle>
-            <v-list-item-subtitle class="text-h6 primary--text">{{
-              subject.price
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn small color="primary" outlined>Купить</v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list-item-group>
-
-      <v-divider class="my-2" />
-
-      <v-subheader>Coosing dack</v-subheader>
-      <v-list dense>
-        <v-list-item v-for="item in coosing" :key="item">
-          <v-list-item-title>{{ item }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-list>
-  </v-navigation-drawer>
-
   <!-- Main Content -->
   <v-main>
     <v-container fluid>
@@ -82,53 +35,61 @@
       </v-row>
     </v-container>
   </v-main>
-
-  <!-- Footer (optional) -->
-  <v-footer app color="grey lighten-3" padless>
-    <v-row justify="center" class="py-2">
-      <span class="caption grey--text text--darken-1">UX‑makmet &copy; 2026</span>
-    </v-row>
-  </v-footer>
 </template>
 
-<script>
-export default {
-  name: 'MainPage',
-  data: () => ({
-    drawer: false,
-    projects: ['Games', 'Sand', 'Cinema', 'Homepage'],
-    subjects: [
-      {
-        name: 'Finley',
-        description: 'Сайт футбольного спортивного клуба',
-        price: '$150',
-      },
-      {
-        name: 'Copooler',
-        description: 'Создайте дружественный клуб',
-        price: '$250',
-      },
-      {
-        name: 'Emala hoke',
-        description: 'Создайте новый клуб для любителей хоккея',
-        price: '$130',
-      },
-    ],
-    coosing: [
-      'Hult Foresman',
-      'Ball',
-      '(сеть)',
-      'Fast',
-      'Stalk',
-      'Oymatsa',
-      'Zom',
-      'Numbers',
-      'Gives a Go',
-    ],
-    supportItems: ['FAQ', 'Контакты', 'Помощь'],
-    tags: ['Новинка', 'Популярное', 'Акция'],
-  }),
+<script setup>
+import { ref } from 'vue'
+
+// Реактивные данные
+const drawer = ref(false)
+
+const projects = ref(['Games', 'Sand', 'Cinema', 'Homepage'])
+
+const subjects = ref([
+  {
+    name: 'Finley',
+    description: 'Сайт футбольного спортивного клуба',
+    price: '$150',
+  },
+  {
+    name: 'Copooler',
+    description: 'Создайте дружественный клуб',
+    price: '$250',
+  },
+  {
+    name: 'Emala hoke',
+    description: 'Создайте новый клуб для любителей хоккея',
+    price: '$130',
+  },
+])
+
+const coosing = ref([
+  'Hult Foresman',
+  'Ball',
+  '(сеть)',
+  'Fast',
+  'Stalk',
+  'Oymatsa',
+  'Zom',
+  'Numbers',
+  'Gives a Go',
+])
+
+const supportItems = ref(['FAQ', 'Контакты', 'Помощь'])
+
+const tags = ref(['Новинка', 'Популярное', 'Акция'])
+
+// Методы
+const handleBuy = (subject) => {
+  console.log('Buying:', subject.name)
+  // Здесь можно добавить логику покупки
+  alert(`Вы выбрали: ${subject.name} за ${subject.price}`)
 }
+
+// Определение имени компонента (опционально)
+defineOptions({
+  name: 'MainPage',
+})
 </script>
 
 <style scoped>

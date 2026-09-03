@@ -1,57 +1,26 @@
 <template>
-  <v-app>
-    <!-- Main Content -->
-    <v-main>
-      <v-container fluid>
-        <!-- ВСТАВКА КОМПОНЕНТА HomeView ЧЕРЕЗ РОУТЕР -->
-        <router-view />
-      </v-container>
-    </v-main>
-  </v-app>
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
 
-<script>
-export default {
-  name: 'App',
-  data: () => ({
-    drawer: false,
-    projects: ['Games', 'Sand', 'Cinema', 'Homepage'],
-    subjects: [
-      {
-        name: 'Finley',
-        description: 'Сайт футбольного спортивного клуба',
-        price: '$150',
-      },
-      {
-        name: 'Copooler',
-        description: 'Создайте дружественный клуб',
-        price: '$250',
-      },
-      {
-        name: 'Emala hoke',
-        description: 'Создайте новый клуб для любителей хоккея',
-        price: '$130',
-      },
-    ],
-    coosing: [
-      'Hult Foresman',
-      'Ball',
-      '(сеть)',
-      'Fast',
-      'Stalk',
-      'Oymatsa',
-      'Zom',
-      'Numbers',
-      'Gives a Go',
-    ],
-    supportItems: ['FAQ', 'Контакты', 'Помощь'],
-    tags: ['Новинка', 'Популярное', 'Акция'],
-  }),
-}
-</script>
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-<style scoped>
-.v-application {
-  background-color: #f5f7fa;
-}
-</style>
+// Импортируем лейауты
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+
+const route = useRoute()
+
+// Определяем какой layout использовать на основе мета-данных маршрута
+const layout = computed(() => {
+  const layoutName = route.meta.layout || 'default'
+
+  const layouts = {
+    default: DefaultLayout,
+  }
+
+  return layouts[layoutName] || DefaultLayout
+})
+</script>
