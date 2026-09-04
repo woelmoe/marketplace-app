@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import ProductGrid from '@/components/ProductGrid/ProductGrid.vue'
 import { ref } from 'vue'
 
 const supportItems = ref(['FAQ', 'Контакты', 'Помощь'])
