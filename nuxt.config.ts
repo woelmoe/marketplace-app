@@ -4,7 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // ✅ Только CSS (без плагина)
-  css: ["vuetify/styles", "@mdi/font/css/materialdesignicons.css"],
+  css: [
+    "vuetify/styles",
+    "@mdi/font/css/materialdesignicons.css",
+    "~/assets/styles.scss",
+  ],
 
   // ✅ Отключаем SSR для Vuetify (он не поддерживает SSR)
   ssr: false,

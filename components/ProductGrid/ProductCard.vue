@@ -1,6 +1,11 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
-    <v-img height="300" :src="product.imgs?.at(0)"></v-img>
+  <v-card class="mx-auto">
+    <v-img
+      height="285"
+      cover
+      :lazy-src="product.imgs?.at(0)"
+      :src="product.imgs?.at(0)"
+    ></v-img>
 
     <v-card-title> Top western road trips </v-card-title>
 

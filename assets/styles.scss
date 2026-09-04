@@ -1,0 +1,7 @@
+*:not(input):not(textarea) {
+  user-select: none;
+}
+
+.app-linear-gradient {
+  background: linear-gradient(90deg, #8e96db 0%, #5e60ce 100%);
+}
