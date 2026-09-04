@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Product } from '../ProductCard/types.ts'
-import ProductCard from '../ProductCard/ProductCard.vue'
+import type { Product } from './types.ts'
+import ProductCard from './ProductCard.vue'
 
 // Мок-данные на основе вашего скриншота
 const products = ref<Product[]>([
@@ -27,6 +27,9 @@ const products = ref<Product[]>([
     badgeText: 'ХОРОШАЯ ЦЕНА',
     badgeColor: 'purple',
     deliveryDate: '8 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+    ],
   },
   {
     id: 2,
@@ -39,6 +42,9 @@ const products = ref<Product[]>([
     isFavorite: true,
     isFastView: true,
     deliveryDate: '9 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADLSURBVCiRjZK9SgNBFIVnZicQLCxsREh+wEaFYGFpk9bGR7BURGxUCDaFhYWFP4KtjfgJFBQrRLCJO5ndmTm+gojZncs9nHO+75u5DPwHVOK5T/7c8yTnxX5A74HuXaCH4MhPld9hSa6D3aZt22PgwpHMcB4eZIgNcBK8BQ4BKxt1suAkeAE+Gw6PAJMAtIBxEAfHM9u+x3LKmLX3cMvf3XfO9vtpX7R2zLZfIP7fgzq4gQwCsvLmGevIFYH/iYydD2+9eugPkv8vY/2JA1QAAAAASUVORK5CYII=',
+    ],
   },
   {
     id: 3,
@@ -52,6 +58,9 @@ const products = ref<Product[]>([
     badgeText: 'ХОРОШАЯ ЦЕНА',
     badgeColor: 'purple',
     deliveryDate: '11 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADKSURBVCiRjZK9SgNBFIVnZifGwsLGRoTkB2xUCBaWNmltfARLRcROhWATaWFhIRZBEysRP4GCYpUINu5kdmfm+AoiZncu93LO9907l4H/gEo8TxSe8rwoeLEf0HugexfoITgKOPQ7w1JcB7tN27bHwJknieA8PKqQmOAkeAscAVY26mTBSXACfDYcHgFWBNAKJoA4N57Z9j2uVhmz9gru+bv/uDkCzvtpe7O0475A4t8CdXADGQRk5S0w1pErCQD1ImP7w1uve/oDExkvYx2JA1QAAAAASUVORK5CYII=',
+    ],
   },
   {
     id: 4,
@@ -65,6 +74,9 @@ const products = ref<Product[]>([
     badgeText: 'ХОРОШАЯ ЦЕНА',
     badgeColor: 'purple',
     deliveryDate: '10 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADKSURBVCiRjZK9SgNBFIVnZid/UbGwtREh+QEbFYKFpU1aGx/BUhGxU0Gw8w0stE1jYxG0tRGfQEGxSgQbdzK7M3N8BRGzO5d7Oef77p3LwH9AJZ4nCk95XhS82A/oPdC9C/QQHAUc+l3MFNfBbtO27TFw5klOeA6PKsQmOAneAkeAlY06WXASnACfjYdHgBUBtIAJIM6NZ7Z9j6tVxqy9gnv+7p9zR8B5P21vlnbcF0j8W6AObiCDgKy8BcY6YkUCsPUi0/7+1quE/gA3aS9j7YgD1MUAAAAASUVORK5CYII=',
+    ],
   },
   {
     id: 5,
@@ -76,6 +88,9 @@ const products = ref<Product[]>([
     reviews: 1226,
     isFavorite: false,
     deliveryDate: '10 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mNk+M9Qz0AEYBxVSF+FABJADveW2H7oAAAAAElFTkSuQmCC',
+    ],
   },
   {
     id: 6,
@@ -89,6 +104,9 @@ const products = ref<Product[]>([
     badgeText: 'ХОРОШАЯ ЦЕНА',
     badgeColor: 'purple',
     deliveryDate: '9 сентября',
+    imgs: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==',
+    ],
   },
   // Добавьте остальные товары из скриншота по аналогии...
 ])

@@ -7,6 +7,7 @@ export interface Product {
   rating: number
   reviews: number
   isFavorite: boolean
+  imgs?: string[]
   isFastView?: boolean
   badgeText?: string
   badgeColor?: string
