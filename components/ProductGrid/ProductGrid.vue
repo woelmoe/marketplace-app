@@ -18,14 +18,14 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Product } from "./types.ts";
 import ProductCard from "./ProductCard.vue";
+import type { Product } from "~/assets/types/types.ts";
 
 // Мок-данные на основе вашего скриншота
 const products = ref<Product[]>([
   {
     id: 1,
-    title: "Nike Air Force 1 / Кроссовки кедры air f...",
+    title: "Инозитол + фолиевая",
     price: 2281,
     oldPrice: 7603,
     discount: 70,

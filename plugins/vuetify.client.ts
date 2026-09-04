@@ -6,7 +6,7 @@ import * as directives from "vuetify/directives";
 const lightTheme = {
   dark: false,
   colors: {
-    primary: "#3538d8",
+    primary: "#57589c",
     secondary: "#F57C00",
     background: "#F8F9FA",
     cards: "#7a7bbb",
@@ -69,6 +69,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
       VCard: {
         color: "cards",
+        style: "cursor: pointer !important;",
       },
       VTextField: {
         variant: "outlined",

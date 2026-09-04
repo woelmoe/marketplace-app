@@ -9,6 +9,10 @@
     "src/**/__tests__/*"
   ],
   "compilerOptions": {
+    "types": [
+      "nuxt",
+      "node"
+    ],
     // Extra safety for array and object lookups, but may have false positives.
     "noUncheckedIndexedAccess": true,
     // Path mapping for cleaner imports.
