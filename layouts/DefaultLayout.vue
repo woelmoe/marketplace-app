@@ -3,11 +3,7 @@
 
   <!-- <NavigationDrawer v-model="drawer" /> -->
 
-  <v-main>
-    <v-container>
-      <slot />
-    </v-container>
-  </v-main>
+  <slot />
 
   <v-footer height="30" class="d-flex app-linear-gradient" app>
     UX-makmet &copy; {{ new Date().getFullYear() }}

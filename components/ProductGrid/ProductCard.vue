@@ -1,15 +1,18 @@
 <template>
-  <v-card>
+  <v-card variant="flat">
     <v-img
       height="285"
       cover
+      class="rounded-lg"
       :lazy-src="product.imgs?.at(0)"
       :src="product.imgs?.at(0)"
     ></v-img>
 
-    <v-card-title> Top western road trips </v-card-title>
-
-    <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+    <v-card-title>
+      <span>{{ product.price }} Р</span>
+      <s class="text-title-small pl-2">{{ product.oldPrice }} Р</s>
+    </v-card-title>
+    <v-card-subtitle>{{ product.title }}</v-card-subtitle>
 
     <v-btn class="mt-1" width="100%" color="primary" variant="flat">
       <v-icon icon="mdi-cart" class="mr-2"></v-icon>

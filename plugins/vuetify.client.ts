@@ -6,12 +6,11 @@ import * as directives from "vuetify/directives";
 const lightTheme = {
   dark: false,
   colors: {
-    primary: "#57589c",
-    secondary: "#F57C00",
-    background: "#F8F9FA",
-    cards: "#7a7bbb",
+    background: "#d0d0e2",
     icons: "#ffffff",
     "header-icons": "#ffffff",
+    primary: "#57589c",
+    secondary: "#F57C00",
     accent: "#FF6F00",
     error: "#D32F2F",
     info: "#0288D1",
@@ -24,7 +23,6 @@ const darkTheme = {
   dark: true,
   colors: {
     background: "#2c293b",
-    cards: "#9393a8",
     icons: "#b3b2b2",
     "header-icons": "#ffffff",
     primary: "#4D8BFF",
@@ -60,6 +58,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     },
     defaults: {
+      VContainer: {
+        color: "background",
+      },
       VBtn: {
         variant: "text",
         style: "cursor: pointer !important;",
@@ -68,7 +69,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         color: "icons",
       },
       VCard: {
-        color: "cards",
+        color: "background",
         style: "cursor: pointer !important;",
       },
       VTextField: {

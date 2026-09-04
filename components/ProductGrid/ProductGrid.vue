@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-4 bg-grey-lighten-5">
+  <v-container class="pa-4">
     <v-row dense>
       <v-col
         v-for="product in products"
@@ -41,7 +41,7 @@ const products = ref<Product[]>([
   },
   {
     id: 2,
-    title: "DOLPHINSPORT / Бутсы сороконож...",
+    title: "Nike Air Force 1",
     price: 1278,
     oldPrice: 6000,
     discount: 79,
@@ -56,7 +56,7 @@ const products = ref<Product[]>([
   },
   {
     id: 3,
-    title: "AM / Матрас 160x200 на кроват...",
+    title: "DOLPHINSPORT ",
     price: 14019,
     oldPrice: 16000,
     discount: 12,
@@ -72,7 +72,7 @@ const products = ref<Product[]>([
   },
   {
     id: 4,
-    title: "Просвещение / Комплект рабочих ...",
+    title: "Матрас 160 см",
     price: 1914,
     oldPrice: 4000,
     discount: 53,
@@ -88,7 +88,7 @@ const products = ref<Product[]>([
   },
   {
     id: 5,
-    title: "QiO / Инозитол 1500 мг с витамином...",
+    title: "Освещение",
     price: 1928,
     oldPrice: 3000,
     discount: 43,
@@ -102,7 +102,7 @@ const products = ref<Product[]>([
   },
   {
     id: 6,
-    title: "Скидки место и клавиатура с подсв...",
+    title: "QiO Инозитол",
     price: 264,
     oldPrice: 1000,
     discount: 74,
@@ -118,7 +118,7 @@ const products = ref<Product[]>([
   },
   {
     id: 7,
-    title: "Nike Air Force 1 / Кроссовки кедры air f...",
+    title: "Скидки",
     price: 2281,
     oldPrice: 7603,
     discount: 70,
