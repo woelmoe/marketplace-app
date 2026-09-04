@@ -1,25 +1,19 @@
 <template>
   <v-app>
-    <!-- Заголовок приложения -->
     <AppHeader @toggle-drawer="drawer = !drawer" />
 
-    <!-- Боковая панель -->
     <NavigationDrawer v-model="drawer" />
 
-    <!-- Основной контент -->
     <v-main>
       <v-container>
         <slot />
       </v-container>
     </v-main>
 
-    <!-- Подвал -->
-    <v-footer app color="grey lighten-3" padless>
-      <v-row justify="center" class="py-2">
-        <span class="caption grey--text text--darken-1">
-          UX-makmet &copy; {{ new Date().getFullYear() }}
-        </span>
-      </v-row>
+    <v-footer class="d-flex flex-column" color="teal" rounded="lg" app>
+      <div class="d-flex w-100 align-center px-4 py-2">
+        <strong>UX-makmet &copy; {{ new Date().getFullYear() }}</strong>
+      </div>
     </v-footer>
   </v-app>
 </template>

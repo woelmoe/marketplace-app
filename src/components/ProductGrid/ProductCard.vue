@@ -1,90 +1,31 @@
 <template>
-  <v-card class="d-flex flex-column h-100 rounded-lg border">
-    <!-- Бейджи -->
-    <div class="position-absolute top-2 left-2 d-flex flex-column ga-1" style="z-index: 10">
-      <v-badge
-        v-if="product.discount"
-        :content="`-${product.discount}%`"
-        color="purple"
-        inline
-        class="custom-badge"
-      ></v-badge>
-      <v-badge
-        v-if="product.badgeText"
-        :content="product.badgeText"
-        :color="product.badgeColor || 'purple'"
-        inline
-        class="custom-badge"
-      ></v-badge>
-    </div>
+  <v-card class="mx-auto" max-width="344">
+    <v-img height="300" :src="product.imgs?.at(0)"></v-img>
 
-    <!-- Кнопка избранного -->
-    <v-btn
-      icon="mdi-heart"
-      variant="text"
-      size="small"
-      class="position-absolute top-2 right-2"
-      style="z-index: 10"
-      bordered
-      :color="product.isFavorite ? 'red' : 'grey-lighten-1'"
-      @click="$emit('toggle-favorite', product.id)"
-    ></v-btn>
+    <v-card-title> Top western road trips </v-card-title>
 
-    <!-- Заглушка изображения -->
-    <v-sheet
-      color="grey-lighten-4"
-      class="d-flex align-center justify-center w-100 flex-grow-1"
-      min-height="180"
-    >
-      <v-icon icon="mdi-image-off-outline" size="64" color="grey-lighten-2"></v-icon>
-    </v-sheet>
+    <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
 
-    <!-- Контент -->
-    <v-card-item class="pa-2">
-      <a href="#" class="text-body-2 text-grey-darken-4 text-decoration-none product-title">
-        {{ product.title }}
-      </a>
+    <v-card-actions>
+      <v-btn color="orange-lighten-2" text="Explore"></v-btn>
 
-      <div class="d-flex align-center mt-1">
-        <v-rating
-          :model-value="product.rating"
-          density="compact"
-          size="x-small"
-          color="amber"
-          half-increments
-          readonly
-          class="me-1"
-        ></v-rating>
-        <span class="text-caption font-weight-bold">{{ product.rating }}</span>
-        <span class="text-caption text-grey ml-1">{{ product.reviews }} оценок</span>
-      </div>
-    </v-card-item>
+      <v-spacer></v-spacer>
 
-    <v-card-text class="pa-2 pt-0 mt-auto">
-      <div v-if="product.oldPrice" class="text-decoration-line-through text-grey text-caption">
-        {{ formatPrice(product.oldPrice) }}
-      </div>
-      <div class="text-h6 font-weight-bold text-grey-darken-4">
-        {{ formatPrice(product.price) }}
-      </div>
-    </v-card-text>
-
-    <v-divider></v-divider>
-    <v-card-actions class="pa-2 d-flex justify-space-between">
-      <span class="text-caption text-purple-darken-4">
-        <v-icon icon="mdi-truck-fast-outline" size="small" class="mr-1"></v-icon>
-        {{ product.deliveryDate }}
-      </span>
-      <v-btn
-        color="purple"
-        class="text-white text-capitalize"
-        size="small"
-        rounded="lg"
-        @click="$emit('add-to-cart', product)"
-      >
-        В корзину
-      </v-btn>
+      <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>
     </v-card-actions>
+
+    <v-expand-transition>
+      <div v-show="show">
+        <v-divider></v-divider>
+
+        <v-card-text>
+          I'm a thing. But, like most politicians, he promised more than he could deliver. You won't
+          have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll
+          go with that data file! Hey, you add a one and two zeros to that or we walk! You're going
+          to do his laundry? I've got to find a way to escape.
+        </v-card-text>
+      </div>
+    </v-expand-transition>
   </v-card>
 </template>
 
@@ -102,9 +43,9 @@ defineEmits<{
   (e: 'add-to-cart', product: Product): void
 }>()
 
-const formatPrice = (price: number) => {
-  return price.toLocaleString('ru-RU') + ' ₽'
-}
+import { ref } from 'vue'
+
+const show = ref(false)
 </script>
 
 <style scoped>

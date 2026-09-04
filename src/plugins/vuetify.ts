@@ -11,7 +11,7 @@ const lightTheme = {
     secondary: '#F57C00', // Pantone 2395C
     // Светлые фоновые тона, которые используются в новом дизайне [citation:1][citation:4][citation:9]
     background: '#F8F9FA', // Светлый, нейтральный фон
-    cards: '#5a5cbd',
+    cards: '#7a7bbb',
     icons: '#ffffff', // Белый для карточек и поверхностей
     'header-icons': '#ffffff',
     // Остальные цвета можно оставить или адаптировать под палитру Ozon
@@ -27,7 +27,7 @@ const darkTheme = {
   dark: true,
   colors: {
     background: '#2c293b', // Темный фон
-    cards: '#FFFFFF',
+    cards: '#9393a8',
     icons: '#b3b2b2', // Белый для карточек и поверхностей
     'header-icons': '#ffffff',
     primary: '#4D8BFF', // Светлый вариант Digital Blue для темной темы
