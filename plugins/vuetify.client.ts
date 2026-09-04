@@ -31,7 +31,7 @@ const darkTheme = {
     error: "#EF5350",
     info: "#29B6F6",
     success: "#66BB6A",
-    warning: "#FFA726",
+    warning: "#D81B60",
   },
 };
 
