@@ -6,7 +6,7 @@
     hide-details
     prepend-inner-icon="mdi-magnify"
     placeholder="Поиск..."
-    style="max-width: 300px"
+    width: 100%
     :class="{ 'field-hover': isHover }"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"

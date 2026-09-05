@@ -12,8 +12,6 @@
 
     <HeaderSearch />
 
-    <v-spacer />
-
     <ThemeToggle class="mr-2" />
 
     <HeaderCartButton />
