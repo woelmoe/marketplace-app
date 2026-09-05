@@ -9,6 +9,7 @@ const lightTheme = {
     background: "#d0d0e2",
     icons: "#ffffff",
     "header-icons": "#ffffff",
+    "header-icons-active": "#e9e4e4",
     primary: "#57589c",
     secondary: "#F57C00",
     accent: "#FF6F00",
@@ -25,6 +26,7 @@ const darkTheme = {
     background: "#2c293b",
     icons: "#b3b2b2",
     "header-icons": "#ffffff",
+    "header-icons-active": "#e9e4e4",
     primary: "#4D8BFF",
     secondary: "#FF4D80",
     accent: "#FFA726",
@@ -75,6 +77,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       VTextField: {
         variant: "outlined",
         density: "comfortable",
+        style: "cursor: pointer !important;",
       },
       VSelect: {
         variant: "outlined",
