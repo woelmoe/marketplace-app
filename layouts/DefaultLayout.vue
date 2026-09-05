@@ -7,6 +7,7 @@
 
   <v-footer height="30" class="d-flex app-linear-gradient" app>
     UX-makmet &copy; {{ new Date().getFullYear() }}
+    <span class="text-body-small pl-4" >Портфолио-сайт разработан: Холодняк Никита</span>
   </v-footer>
 </template>
 
