@@ -10,7 +10,9 @@
         lg="2"
         xl="2"
       >
-        <ProductCard :product="product" />
+        <NuxtLink :to="`/products/${product.id}`" class="product-link">
+          <ProductCard :product="product" />
+        </NuxtLink>
       </v-col>
     </v-row>
   </v-container>
