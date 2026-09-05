@@ -9,8 +9,8 @@
     ></v-img>
 
     <v-card-title>
-      <span>{{ product.price }} ₽</span>
-      <s class="text-title-small pl-2">{{ product.oldPrice }} ₽</s>
+      <span class="text-warning">{{ product.price }} ₽</span>
+      <s class="text-title-small pl-2 text-primary">{{ product.oldPrice }} ₽</s>
     </v-card-title>
     <v-card-subtitle>{{ product.title }}</v-card-subtitle>
 
