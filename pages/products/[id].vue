@@ -1,80 +1,155 @@
 <template>
-  <v-container>
-    <v-btn @click="router.back()" prepend-icon="mdi-arrow-left" class="mb-4">
-      Назад
-    </v-btn>
+  <v-container class="product-page">
+    <!-- Хлебные крошки -->
+    <ProductBreadcrumbs :items="breadcrumbs" />
 
-    <v-row v-if="product">
+    <v-row>
       <v-col cols="12" md="6">
-        <v-img :src="product.image" height="400" cover class="rounded" />
+        <!-- Изображение -->
+        <ProductImage :image="product.image" :name="product.name" />
       </v-col>
-      <v-col cols="12" md="6">
-        <h1 class="text-h3">{{ product.name }}</h1>
-        <p class="text-h4 text-primary mt-4">{{ product.price }} ₽</p>
-        <p class="text-body-1 mt-4">
-          {{ product.description || "Описание товара" }}
-        </p>
-        <v-btn color="primary" size="x-large" class="mt-4">
-          Добавить в корзину
-        </v-btn>
-      </v-col>
-    </v-row>
 
-    <v-row v-else-if="!loading">
-      <v-col cols="12" class="text-center">
-        <h1 class="text-h2">Товар не найден</h1>
-        <v-btn to="/" class="mt-4">Вернуться на главную</v-btn>
+      <v-col cols="12" md="6">
+        <!-- Информация о товаре -->
+        <ProductInfo
+          :name="product.name"
+          :rating="product.rating"
+          :sale="!!product.oldPrice"
+        />
+
+        <!-- Характеристики -->
+        <ProductCharacteristics :characteristics="characteristics" />
+
+        <!-- Дополнительная информация -->
+        <ProductAdditionalInfo :items="additionalInfo" />
+
+        <!-- Описание -->
+        <ProductDescription :description="product.description" />
+
+        <!-- Действия -->
+        <ProductActions
+          :price="product.price"
+          :old-price="product.oldPrice"
+          @add-to-cart="handleAddToCart"
+          @buy-now="handleBuyNow"
+        />
+
+        <!-- Доставка -->
+        <ProductDelivery
+          :delivery-date="product.deliveryDate"
+          :seller="product.seller"
+          :rating="product.sellerRating"
+        />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
+import ProductActions from "~/components/Product/ProductActions.vue";
+import ProductAdditionalInfo from "~/components/Product/ProductAdditionalInfo.vue";
+import ProductBreadcrumbs from "~/components/Product/ProductBreadcrumbs.vue";
+import ProductCharacteristics from "~/components/Product/ProductCharacteristics.vue";
+import ProductDelivery from "~/components/Product/ProductDelivery.vue";
+import ProductDescription from "~/components/Product/ProductDescription.vue";
+import ProductImage from "~/components/Product/ProductImage.vue";
+import ProductInfo from "~/components/Product/ProductInfo.vue";
+
 const route = useRoute();
 const router = useRouter();
-const loading = ref(true);
 
-// Ваши продукты
-const products = [
-  {
-    id: 1,
-    name: "Товар 1",
-    price: 1000,
-    image: "/images/product1.jpg",
-    description: "Описание товара 1",
-  },
-  {
-    id: 2,
-    name: "Товар 2",
-    price: 2000,
-    image: "/images/product2.jpg",
-    description: "Описание товара 2",
-  },
-  {
-    id: 3,
-    name: "Товар 3",
-    price: 1500,
-    image: "/images/product3.jpg",
-    description: "Описание товара 3",
-  },
-];
+// Хлебные крошки
+const breadcrumbs = ref([
+  { title: "Главная", to: "/" },
+  { title: "Мебель", to: "/catalog/furniture" },
+  { title: "По помещениям", to: "/catalog/furniture/rooms" },
+  { title: "Гостиная", to: "/catalog/furniture/rooms/living" },
+  { title: "Диваны", to: "/catalog/furniture/rooms/living/sofas" },
+]);
 
-// Находим товар по ID
-const product = computed(() => {
-  const id = Number(route.params.id);
-  return products.find((p) => p.id === id);
+// Данные товара
+const product = ref({
+  id: 1,
+  name: "Мини диван 1180x540x740",
+  price: 9990,
+  oldPrice: 12990,
+  rating: 0,
+  article: "619177306",
+  upholstery: "Велюр",
+  material: "ЛДСП",
+  legs: "пластик",
+  bedWidth: "54 см",
+  firmness: "жесткая",
+  style: "Классический",
+  description:
+    "Уютный мини-диван идеально подходит для небольших помещений. Компактный размер позволяет разместить его даже в малогабаритных гостиных. Мягкая обивка из велюра приятна на ощупь и устойчива к износу.",
+  image: "/images/sofa.jpg",
+  deliveryDate: "10 октября",
+  seller: "САЛОН МЕБЕЛИ",
+  sellerRating: 0,
 });
 
-// Проверяем загрузку
-onMounted(() => {
-  loading.value = false;
+// Характеристики для компонента
+const characteristics = computed(() => ({
+  article: { label: "Артикул", value: product.value.article },
+  upholstery: { label: "Материал обивки", value: product.value.upholstery },
+  material: { label: "Материал корпуса", value: product.value.material },
+  legs: { label: "Материал ножек", value: product.value.legs },
+}));
 
-  // Если товар не найден, показываем 404
-  if (!product.value) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: "Товар не найден",
-    });
-  }
-});
+// Дополнительная информация
+const additionalInfo = computed(() => ({
+  bedWidth: { label: "Ширина спального места", value: product.value.bedWidth },
+  firmness: { label: "Жесткость", value: product.value.firmness },
+  style: { label: "Стиль дизайна", value: product.value.style, cols: 12 },
+}));
+
+// Похожие товары (заглушка)
+const relatedProducts = ref([
+  { id: 2, name: "Диван угловой", price: 15990, image: "/images/sofa2.jpg" },
+  { id: 3, name: "Диван-книжка", price: 12990, image: "/images/sofa3.jpg" },
+]);
+
+// Обработчики событий
+const handleAddToCart = () => {
+  console.log("Добавлено в корзину:", product.value.id);
+  // Логика добавления в корзину
+};
+
+const handleBuyNow = () => {
+  console.log("Купить сейчас:", product.value.id);
+  router.push("/checkout");
+};
+
+const handleViewAll = () => {
+  router.push("/catalog/furniture/rooms/living/sofas");
+};
+
+// Загрузка данных с API
+const { data, error } = await useFetch(`/api/products/${route.params.id}`);
+
+if (error.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Товар не найден",
+  });
+}
+
+if (data.value) {
+  product.value = data.value;
+}
 </script>
+
+<style scoped>
+.product-page {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+  .product-page {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+}
+</style>
