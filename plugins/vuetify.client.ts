@@ -32,7 +32,7 @@ const darkTheme = {
     accent: "#FFA726",
     error: "#EF5350",
     info: "#29B6F6",
-    success: "#66BB6A",
+    success: "#388E3C",
     warning: "#D81B60",
   },
 };

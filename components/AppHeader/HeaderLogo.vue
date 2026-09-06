@@ -5,13 +5,15 @@
     class="font-weight-bold text-white"
     @click="goMain"
   >
-    UX-makmet
+    {{ APP_NAME }}
   </v-btn>
 </template>
 
 <script setup lang="ts">
-const router = useRouter();
+import { APP_NAME } from '~/assets/types/CommonDefinitions'
+
+const router = useRouter()
 function goMain() {
-  router.push("/");
+  router.push('/')
 }
 </script>

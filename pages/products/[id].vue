@@ -46,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 import { useProductsStore } from '~/stores/product'
 
