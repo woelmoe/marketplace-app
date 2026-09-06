@@ -10,7 +10,7 @@
       {{ name }}
     </h1>
 
-    <!-- Рейтинг - исправлено -->
+    <!-- Рейтинг -->
     <div class="d-flex align-center mb-4">
       <v-rating
         :model-value="rating"
