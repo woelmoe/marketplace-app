@@ -5,7 +5,7 @@
         Характеристики и описание
       </v-expansion-panel-title>
       <v-expansion-panel-text>
-        <p>{{ description }}</p>
+        <p>{{ product. }}</p>
         <v-divider class="my-2" />
         <div class="d-flex align-center">
           <v-icon
@@ -22,9 +22,11 @@
 </template>
 
 <script setup lang="ts">
+import type { Product } from '~/assets/types/types'
+
 defineProps<{
-  description: string;
-}>();
+  product: Product
+}>()
 </script>
 
 <style scoped>
