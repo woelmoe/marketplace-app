@@ -15,7 +15,7 @@
 
   <v-snackbar
     v-model="isCopied"
-    timeout="2000"
+    timeout="1500"
     color="success"
     location="bottom"
     style="opacity: 0.9"
@@ -38,9 +38,6 @@ const isCopied = ref(false)
 function onClickTg() {
   copyToClipboard()
   isCopied.value = true
-  setTimeout(() => {
-    isCopied.value = false
-  }, 1500)
 }
 </script>
 
