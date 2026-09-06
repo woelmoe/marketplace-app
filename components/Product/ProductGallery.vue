@@ -1,39 +1,31 @@
 <template>
   <div class="gallery-wrapper">
-    <!-- 1. Левая колонка: Вертикальная карусель миниатюр -->
+    <!-- 1. Левая колонка: Галерея миниатюр -->
     <div class="thumbnails-column">
-      <v-carousel
-        v-model="selectedIndex"
-        direction="vertical"
-        height="100%"
-        hide-delimiters
-        show-arrows="false"
-        class="thumbnails-carousel"
-      >
-        <v-carousel-item
+      <div class="thumbnails-container" ref="thumbnailsContainer">
+        <div
           v-for="(img, index) in product?.imgs"
           :key="index"
-          :src="img"
-          cover
-          class="thumbnail-item"
+          class="thumbnail-item-wrapper"
           @click="selectedIndex = index"
         >
-          <!-- Класс для выбранной миниатюры (фиолетовая рамка) -->
-          <div
-            class="thumbnail-overlay"
+          <v-img
+            :src="img"
+            cover
+            class="thumbnail-item"
             :class="{ active: index === selectedIndex }"
-          ></div>
-        </v-carousel-item>
-      </v-carousel>
+          />
+        </div>
+      </div>
 
-      <!-- Кастомные стрелки для миниатюр (сверху и снизу) -->
+      <!-- Стрелки навигации -->
       <v-btn
         icon="mdi-chevron-up"
         size="small"
         variant="flat"
         color="white"
         class="thumb-nav-btn top"
-        @click="selectedIndex = Math.max(0, selectedIndex - 1)"
+        @click="scrollThumbnails(-1)"
       />
       <v-btn
         icon="mdi-chevron-down"
@@ -41,14 +33,12 @@
         variant="flat"
         color="white"
         class="thumb-nav-btn bottom"
-        @click="
-          selectedIndex = Math.min(product?.imgs?.length - 1, selectedIndex + 1)
-        "
+        @click="scrollThumbnails(1)"
       />
     </div>
 
     <div class="main-image-column">
-      <ProductImage :product />
+      <ProductImage :product :selected-index="selectedIndex" />
     </div>
   </div>
 </template>
@@ -67,9 +57,28 @@ interface Hotspot {
   x: number // Процент от левого края (например, 20)
   y: number // Процент от верхнего края (например, 60)
 }
+
 const props = defineProps<IProps>()
 
 const selectedIndex = ref(0)
+const thumbnailsContainer = ref<HTMLElement | null>(null)
+
+// Количество видимых миниатюр
+const ITEMS_PER_VIEW = 6
+
+// Прокрутка галереи миниатюр
+function scrollThumbnails(direction: number) {
+  const container = thumbnailsContainer.value
+  if (!container) return
+
+  const itemHeight = container.scrollHeight / (product?.imgs?.length || 1)
+  const scrollAmount = itemHeight * ITEMS_PER_VIEW
+
+  container.scrollBy({
+    top: direction * scrollAmount,
+    behavior: 'smooth'
+  })
+}
 
 // Пример хотспотов (координаты в процентах)
 const hotspots: Hotspot[] = [
@@ -87,7 +96,7 @@ function handleHotspotClick(spot: Hotspot) {
 /* Общая обертка */
 .gallery-wrapper {
   width: 100%;
-  height: 600px; /* Или задайте высоту через проп */
+  height: 600px;
   display: flex;
   gap: 8px;
 }
@@ -97,48 +106,74 @@ function handleHotspotClick(spot: Hotspot) {
   width: 80px;
   position: relative;
   flex-shrink: 0;
+  height: 100%;
 }
 
-.thumbnails-carousel {
+/* Контейнер с прокруткой для миниатюр */
+.thumbnails-container {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE и Edge */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+  border-radius: 8px;
+}
+
+/* Скрываем скроллбар для Chrome/Safari */
+.thumbnails-container::-webkit-scrollbar {
+  display: none;
+}
+
+.thumbnail-item-wrapper {
+  flex-shrink: 0;
+  height: calc((100% - 20px) / 6); /* 6 элементов с учетом отступов */
+  min-height: 60px;
+  cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .thumbnail-item {
-  cursor: pointer;
-}
-
-/* Рамка для выбранной миниатюры */
-.thumbnail-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid transparent;
   border-radius: 8px;
-  transition: border-color 0.2s;
-}
-.thumbnail-overlay.active {
-  border-color: #7b1fa2; /* Фиолетовый цвет */
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
 }
 
-/* Кастомные стрелки на миниатюрах */
+/* Активная миниатюра */
+.thumbnail-item.active {
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 2px rgba(123, 31, 162, 0.3);
+}
+
+/* Кастомные стрелки */
 .thumb-nav-btn {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
+  transition: opacity 0.2s;
 }
+
+.thumb-nav-btn:hover {
+  opacity: 1;
+}
+
 .thumb-nav-btn.top {
-  top: 8px;
+  top: 4px;
 }
+
 .thumb-nav-btn.bottom {
-  bottom: 8px;
+  bottom: 4px;
 }
 
 /* Колонка главного изображения */
@@ -147,40 +182,17 @@ function handleHotspotClick(spot: Hotspot) {
   position: relative;
 }
 
-.main-image {
-  border-radius: 12px;
-}
-
-/* Хотспоты */
-.hotspot-btn {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-.hotspot-label {
-  position: absolute;
-  transform: translate(-20%, -50%);
-  z-index: 2;
-  color: white;
-  background-color: #4d8bff;
-  padding: 4px 8px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  white-space: nowrap;
-  pointer-events: none; /* Чтобы текст не мешал кликать по кнопке */
-}
-
-/* Адаптивность (например, для телефона) */
+/* Адаптивность */
 @media (max-width: 600px) {
   .gallery-wrapper {
     height: 400px;
   }
   .thumbnails-column {
     width: 50px;
+  }
+  .thumbnail-item-wrapper {
+    height: calc((100% - 16px) / 6);
+    min-height: 40px;
   }
 }
 </style>
