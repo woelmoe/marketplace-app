@@ -9,30 +9,36 @@
 
         <v-col cols="12" md="6">
           2
-          <!-- <ProductInfo
-            :name="product.name"
-            :rating="product.rating"
-            :sale="!!product.oldPrice"
-          /> -->
 
-          <!-- <ProductCharacteristics :characteristics="characteristics" /> -->
+          <div v-if="!currentProduct">
+            <v-skeleton-loader
+              type="heading, text, image, paragraph"
+              class="mb-4"
+            ></v-skeleton-loader>
+          </div>
 
-          <!-- <ProductAdditionalInfo :items="additionalInfo" /> -->
+          <template v-else>
+            <ProductInfo :product="currentProduct" />
 
-          <!-- <ProductDescription :description="product.description" /> -->
+            <ProductCharacteristics :product="currentProduct" />
 
-          <!-- <ProductActions
+            <!-- <ProductAdditionalInfo :items="additionalInfo" /> -->
+
+            <!-- <ProductDescription :description="product.description" /> -->
+
+            <!-- <ProductActions
             :price="product.price"
             :old-price="product.oldPrice"
             @add-to-cart="handleAddToCart"
             @buy-now="handleBuyNow"
-          />
-
-          <ProductDelivery
+            />
+            
+            <ProductDelivery
             :delivery-date="product.deliveryDate"
             :seller="product.seller"
             :rating="product.sellerRating"
-          /> -->
+            /> -->
+          </template>
         </v-col>
       </v-row>
     </v-container>
@@ -40,13 +46,29 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '~/assets/types/types'
+import { LocalStorageKeys, type Product } from '~/assets/types/types'
 import { useProductsStore } from '~/stores/product'
 
-const route = useRoute()
 const router = useRouter()
 
-const { currentProduct } = useProductsStore()
+const store = useProductsStore()
+const { currentProduct } = storeToRefs(store)
+const { setCurrentProduct } = store
+
+function setProductFromLocalStorage() {
+  const productStr = localStorage.getItem(LocalStorageKeys.currentProduct)
+  if (!productStr) {
+    router.push('/')
+    return
+  }
+
+  const value: Product = JSON.parse(productStr)
+  setCurrentProduct(value)
+}
+
+onMounted(() => {
+  setProductFromLocalStorage()
+})
 </script>
 
 <style scoped>

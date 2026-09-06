@@ -29,7 +29,6 @@ import type { Product } from '~/assets/types/types.ts'
 import { mockProducts } from './mockProducts.ts'
 
 const { setCurrentProduct } = useProductsStore()
-// Мок-данные на основе вашего скриншота
 const products = ref<Product[]>([])
 
 onMounted(() => {
