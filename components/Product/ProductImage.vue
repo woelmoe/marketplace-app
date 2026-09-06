@@ -4,7 +4,7 @@
       :src="product?.imgs?.at(0)"
       :lazy-src="product?.imgs?.at(0)"
       :alt="product?.title"
-      height="400"
+      height="650"
       cover
       class="rounded"
     >

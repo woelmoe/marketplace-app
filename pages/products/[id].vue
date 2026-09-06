@@ -3,7 +3,11 @@
     <v-container class="product-page">
       <v-row>
         <v-col cols="12" md="6">
-          <ProductImage :product="currentProduct" />
+          <v-row class="d-flex" no-gutters>
+            <v-col cols="9">
+              <ProductGallery :product="currentProduct" />
+            </v-col>
+          </v-row>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -25,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 import { useProductsStore } from '~/stores/product'
@@ -34,6 +39,8 @@ const router = useRouter()
 const store = useProductsStore()
 const { currentProduct } = storeToRefs(store)
 const { setCurrentProduct } = store
+
+const selectedImageIndex = ref(0)
 
 function setProductFromLocalStorage() {
   const productStr = localStorage.getItem(LocalStorageKeys.currentProduct)
@@ -48,6 +55,10 @@ function setProductFromLocalStorage() {
 
 onMounted(() => {
   setProductFromLocalStorage()
+})
+
+watch(currentProduct, () => {
+  selectedImageIndex.value = 0
 })
 </script>
 
