@@ -22,43 +22,43 @@
 
 #### Светлая
 
-![Главный экран](docs/desktop/home-desktop-light.png)
+![Главный экран](docs/home-desktop-light.png)
 
 #### Темная
 
-![Главный экран](docs/desktop/home-desktop-dark.jpg)
+![Главный экран](docs/home-desktop-dark.jpg)
 
 ### 🛍️ Страница товара
 
 #### Светлая
 
-![Карточка товара](docs/desktop/card-light.jpg)
-![Карточка товара](docs/desktop/card-light-1.jpg)
+![Карточка товара](docs/card-light.jpg)
+![Карточка товара](docs/card-light-1.jpg)
 
 #### Темная
 
-![Карточка товара](docs/desktop/card-dark.jpg)
-![Карточка товара](docs/desktop/card-dark-1.jpg)
+![Карточка товара](docs/card-dark.jpg)
+![Карточка товара](docs/card-dark-1.jpg)
 
 ### 🖥️ Мобильная версия
 
 #### Светлая
 
-![Главный экран](docs/mobile/home-mobile-light.JPG)
+![Главный экран](docs/home-mobile-light.JPG)
 
 #### Темная
 
-![Главный экран](docs/mobile/home-mobile-dark.JPG)
+![Главный экран](docs/home-mobile-dark.JPG)
 
 ### 🛍️ Страница товара
 
 #### Светлая
 
-![Карточка товара](docs/mobile/card-mobile-light.JPG)
+![Карточка товара](docs/card-mobile-light.JPG)
 
 #### Темная
 
-![Карточка товара](docs/mobile/card-mobile-dark.JPG)
+![Карточка товара](docs/card-mobile-dark.JPG)
 
 </div>
 
