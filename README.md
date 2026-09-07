@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🛒 UX-Market — Интернет-магазин на Nuxt 3 + Vuetify 3
+# 🛒 UX-Market — Интернет-магазин на Nuxt + Vuetify
 
 **Современный e-commerce проект с адаптивным дизайном, быстрой производительностью и чистым кодом.**
 
-[![Nuxt](https://img.shields.io/badge/Nuxt-3-00DC82?style=for-the-badge&logo=nuxt&logoColor=white)](https://nuxt.com)
-[![Vue](https://img.shields.io/badge/Vue-3-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)](https://vuejs.org)
-[![Vuetify](https://img.shields.io/badge/Vuetify-3-1867C0?style=for-the-badge&logo=vuetify&logoColor=white)](https://vuetifyjs.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Pinia](https://img.shields.io/badge/Pinia-2-FFD859?style=for-the-badge&logo=pinia&logoColor=black)](https://pinia.vuejs.org)
+[![Nuxt](https://img.shields.io/badge/Nuxt-00DC82?style=for-the-badge&logo=nuxt&logoColor=white)](https://nuxt.com)
+[![Vue](https://img.shields.io/badge/Vue-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)](https://vuejs.org)
+[![Vuetify](https://img.shields.io/badge/Vuetify-1867C0?style=for-the-badge&logo=vuetify&logoColor=white)](https://vuetifyjs.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=black)](https://pinia.vuejs.org)
 
 </div>
 
@@ -20,45 +20,47 @@
 
 ### 🖥️ Десктопная версия
 
-#### Светлая
+#### Светлая тема
 
-![Главный экран](docs/home-desktop-light.png)
+<img src="docs/home-desktop-light.png" width="600" alt="Главный экран (светлая)">
 
-#### Темная
+#### Тёмная тема
 
-![Главный экран](docs/home-desktop-dark.png)
-
-### 🛍️ Страница товара
-
-#### Светлая
-
-![Карточка товара](docs/card-light.png)
-![Карточка товара](docs/card-light-1.png)
-
-#### Темная
-
-![Карточка товара](docs/card-dark.png)
-![Карточка товара](docs/card-dark-1.png)
-
-### 🖥️ Мобильная версия
-
-#### Светлая
-
-![Главный экран](docs/home-mobile-light.png)
-
-#### Темная
-
-![Главный экран](docs/home-mobile-dark.png)
+<img src="docs/home-desktop-dark.png" width="600" alt="Главный экран (тёмная)">
 
 ### 🛍️ Страница товара
 
-#### Светлая
+#### Светлая тема
 
-![Карточка товара](docs/card-mobile-light.png)
+<img src="docs/card-light.png" width="600" alt="Карточка товара (светлая)">
 
-#### Темная
+<img src="docs/card-light-1.png" width="600" alt="Карточка товара (светлая, вторая)">
 
-![Карточка товара](docs/card-mobile-dark.png)
+#### Тёмная тема
+
+<img src="docs/card-dark.png" width="600" alt="Карточка товара (тёмная)">
+
+<img src="docs/card-dark-1.png" width="600" alt="Карточка товара (тёмная, вторая)">
+
+### 📱 Мобильная версия
+
+#### Светлая тема
+
+<img src="docs/home-mobile-light.png" width="300" alt="Мобильный главный экран (светлая)">
+
+#### Тёмная тема
+
+<img src="docs/home-mobile-dark.png" width="300" alt="Мобильный главный экран (тёмная)">
+
+### 🛍️ Страница товара (мобильная)
+
+#### Светлая тема
+
+<img src="docs/card-mobile-light.png" width="300" alt="Мобильная карточка товара (светлая)">
+
+#### Тёмная тема
+
+<img src="docs/card-mobile-dark.png" width="300" alt="Мобильная карточка товара (тёмная)">
 
 </div>
 
@@ -80,15 +82,17 @@
 - 📱 Полная адаптивность (mobile-first)
 - ⚡ Оптимизированная производительность (SSR)
 
+Находится в активной разработке в качестве портфолио.
+
 ---
 
 ## 🛠️ Технологии
 
 | Технология                  | Назначение                |
 | --------------------------- | ------------------------- |
-| **Nuxt 3**                  | SSR, роутинг, оптимизация |
-| **Vue 3 (Composition API)** | Реактивность, компоненты  |
-| **Vuetify 3**               | UI-компоненты, темизация  |
+| **Nuxt**                    | Роутинг, оптимизация      |
+| **Vue (Composition API)**   | Реактивность, компоненты  |
+| **Vuetify**                 | UI-компоненты, темизация  |
 | **TypeScript**              | Строгая типизация         |
 | **Pinia**                   | Управление состоянием     |
 | **SCSS**                    | Стилизация, переменные    |
@@ -103,6 +107,14 @@
 - ✅ **Обработка загрузки** — скелетоны, лоадеры, плейсхолдеры
 - ✅ **Локальное хранилище** — сохранение состояния между сессиями
 - ✅ **Чистая архитектура** — компоненты, composables, stores
+
+---
+
+## 🚧 Фичи на будущее
+
+- Страница корзины
+- Логин, авторизация
+- API CRUD
 
 ---
 
@@ -123,4 +135,3 @@ npm run start
 
 # 5. Открыть в браузере
 # http://localhost:3000
-```
