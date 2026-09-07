@@ -22,7 +22,7 @@
 
 #### Светлая
 
-![Главный экран](docs/desktop/home-desktop-light.jpg)
+![Главный экран](docs/desktop/home-desktop-light.png)
 
 #### Темная
 
