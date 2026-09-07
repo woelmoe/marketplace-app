@@ -26,7 +26,7 @@
 
 #### Темная
 
-![Главный экран](docs/home-desktop-dark.jpg)
+![Главный экран](docs/home-desktop-dark.png)
 
 ### 🛍️ Страница товара
 
