@@ -1,5 +1,5 @@
 <template>
-  <v-footer height="30" class="d-flex app-linear-gradient" app>
+  <v-footer height="35" class="d-flex app-linear-gradient" app>
     <span class="text-body-small"> {{ APP_NAME }} &copy; {{ new Date().getFullYear() }} </span>
     <span class="text-label-small pl-4">
       Портфолио-сайт разработан: {{ AUTHOR }} tg:
