@@ -2,12 +2,8 @@
   <v-main>
     <v-container class="product-page">
       <v-row>
-        <v-col cols="12" md="6">
-          <v-row class="d-flex" no-gutters>
-            <v-col cols="9">
-              <ProductGallery :product="currentProduct" />
-            </v-col>
-          </v-row>
+        <v-col cols="12" md="5">
+          <ProductGallery :product="currentProduct" />
         </v-col>
 
         <v-col cols="12" md="6">
@@ -29,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 import { useProductsStore } from '~/stores/product'

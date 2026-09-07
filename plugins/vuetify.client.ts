@@ -13,7 +13,7 @@ const lightTheme = {
     primary: '#57589c',
     secondary: '#F57C00',
     error: '#D32F2F',
-    info: '#0288D1',
+    info: '#8860d3',
     success: '#388E3C',
     warning: '#D81B60'
   }
@@ -26,10 +26,10 @@ const darkTheme = {
     icons: '#b3b2b2',
     'header-icons': '#ffffff',
     'header-icons-active': '#e9e4e4',
-    primary: '#4D8BFF',
+    primary: '#57589c',
     secondary: '#FF4D80',
     error: '#EF5350',
-    info: '#29B6F6',
+    info: '#b0a1cc',
     success: '#388E3C',
     warning: '#D81B60'
   }

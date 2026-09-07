@@ -8,7 +8,7 @@
     </div>
 
     <template v-else>
-      <h1 class="text-h4 font-weight-bold mb-2">
+      <h1 class="text-title-large font-weight-bold mb-2">
         {{ product.title }}
       </h1>
 

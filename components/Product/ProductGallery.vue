@@ -1,46 +1,46 @@
 <template>
-  <div class="gallery-wrapper">
-    <!-- 1. Левая колонка: Галерея миниатюр -->
-    <div class="thumbnails-column">
+  <v-row class="gallery-wrapper" no-gutters>
+    <v-col cols="auto" class="thumbnails-column">
       <div class="thumbnails-container" ref="thumbnailsContainer">
         <div
           v-for="(img, index) in product?.imgs"
           :key="index"
-          class="thumbnail-item-wrapper"
-          @click="selectedIndex = index"
+          class="thumbnail-item-wrapper cursor-pointer"
+          @mouseenter="selectedIndex = index"
         >
           <v-img
             :src="img"
-            cover
-            class="thumbnail-item"
-            :class="{ active: index === selectedIndex }"
+            class="thumbnails-img rounded-xl border-sm"
+            :class="{
+              'thumbnails-img--active': index === selectedIndex
+            }"
           />
         </div>
       </div>
 
-      <!-- Стрелки навигации -->
       <v-btn
-        icon="mdi-chevron-up"
-        size="small"
         variant="flat"
-        color="white"
-        class="thumb-nav-btn top"
+        color="primary"
+        class="thumb-nav-btn top rounded-circle"
         @click="scrollThumbnails(-1)"
-      />
-      <v-btn
-        icon="mdi-chevron-down"
-        size="small"
-        variant="flat"
-        color="white"
-        class="thumb-nav-btn bottom"
-        @click="scrollThumbnails(1)"
-      />
-    </div>
+      >
+        <v-icon color="icons">mdi-chevron-up</v-icon>
+      </v-btn>
 
-    <div class="main-image-column">
+      <v-btn
+        variant="outlined"
+        color="primary"
+        class="thumb-nav-btn bottom rounded-circle"
+        @click="scrollThumbnails(1)"
+      >
+        <v-icon color="primary">mdi-chevron-down</v-icon>
+      </v-btn>
+    </v-col>
+
+    <v-col>
       <ProductImage :product :selected-index="selectedIndex" />
-    </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup lang="ts">
@@ -51,27 +51,18 @@ interface IProps {
   product: Product | undefined
 }
 
-interface Hotspot {
-  id: number
-  label: string
-  x: number // Процент от левого края (например, 20)
-  y: number // Процент от верхнего края (например, 60)
-}
-
 const props = defineProps<IProps>()
 
 const selectedIndex = ref(0)
 const thumbnailsContainer = ref<HTMLElement | null>(null)
 
-// Количество видимых миниатюр
 const ITEMS_PER_VIEW = 6
 
-// Прокрутка галереи миниатюр
 function scrollThumbnails(direction: number) {
   const container = thumbnailsContainer.value
   if (!container) return
 
-  const itemHeight = container.scrollHeight / (product?.imgs?.length || 1)
+  const itemHeight = container.scrollHeight / (props.product?.imgs?.length || 1)
   const scrollAmount = itemHeight * ITEMS_PER_VIEW
 
   container.scrollBy({
@@ -79,29 +70,15 @@ function scrollThumbnails(direction: number) {
     behavior: 'smooth'
   })
 }
-
-// Пример хотспотов (координаты в процентах)
-const hotspots: Hotspot[] = [
-  { id: 1, label: '50x70', x: 25, y: 60 },
-  { id: 2, label: '70x70', x: 75, y: 75 }
-]
-
-function handleHotspotClick(spot: Hotspot) {
-  console.log('Клик по хотспоту:', spot.label)
-  // Здесь можно перейти по ссылке на другой товар
-}
 </script>
 
-<style scoped>
-/* Общая обертка */
+<style scoped lang="scss">
 .gallery-wrapper {
-  width: 100%;
   height: 600px;
   display: flex;
   gap: 8px;
 }
 
-/* Колонка миниатюр */
 .thumbnails-column {
   width: 80px;
   position: relative;
@@ -109,18 +86,23 @@ function handleHotspotClick(spot: Hotspot) {
   height: 100%;
 }
 
-/* Контейнер с прокруткой для миниатюр */
 .thumbnails-container {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE и Edge */
+
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 4px 0;
   border-radius: 8px;
+}
+
+.thumbnails-img {
+  &--active {
+    outline: 2px solid rgb(var(--v-theme-info));
+    outline-offset: -2px;
+  }
 }
 
 /* Скрываем скроллбар для Chrome/Safari */
@@ -132,36 +114,20 @@ function handleHotspotClick(spot: Hotspot) {
   flex-shrink: 0;
   height: calc((100% - 20px) / 6); /* 6 элементов с учетом отступов */
   min-height: 60px;
-  cursor: pointer;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-}
-
-.thumbnail-item {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
-}
-
-/* Активная миниатюра */
-.thumbnail-item.active {
-  border-color: #7b1fa2;
-  box-shadow: 0 0 0 2px rgba(123, 31, 162, 0.3);
 }
 
 /* Кастомные стрелки */
 .thumb-nav-btn {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  border-radius: 50%;
+  transform: translateX(-50%) translateY(25%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0.9;
+  opacity: 0.7;
   transition: opacity 0.2s;
+  min-width: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
 }
 
 .thumb-nav-btn:hover {
@@ -174,25 +140,5 @@ function handleHotspotClick(spot: Hotspot) {
 
 .thumb-nav-btn.bottom {
   bottom: 4px;
-}
-
-/* Колонка главного изображения */
-.main-image-column {
-  flex-grow: 1;
-  position: relative;
-}
-
-/* Адаптивность */
-@media (max-width: 600px) {
-  .gallery-wrapper {
-    height: 400px;
-  }
-  .thumbnails-column {
-    width: 50px;
-  }
-  .thumbnail-item-wrapper {
-    height: calc((100% - 16px) / 6);
-    min-height: 40px;
-  }
 }
 </style>
