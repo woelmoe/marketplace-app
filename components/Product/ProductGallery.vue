@@ -18,23 +18,17 @@
         </div>
       </div>
 
-      <v-btn
-        variant="flat"
-        color="primary"
-        class="thumb-nav-btn top rounded-circle"
+      <ThumbNavButton
+        icon="mdi-chevron-up"
+        position="top"
         @click="scrollThumbnails(-1)"
-      >
-        <v-icon color="icons">mdi-chevron-up</v-icon>
-      </v-btn>
+      />
 
-      <v-btn
-        variant="outlined"
-        color="primary"
-        class="thumb-nav-btn bottom rounded-circle"
+      <ThumbNavButton
+        icon="mdi-chevron-down"
+        position="bottom"
         @click="scrollThumbnails(1)"
-      >
-        <v-icon color="primary">mdi-chevron-down</v-icon>
-      </v-btn>
+      />
     </v-col>
 
     <v-col>
@@ -46,6 +40,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Product } from '~/assets/types/types'
+import ThumbNavButton from './ThumbNavButton.vue'
 
 interface IProps {
   product: Product | undefined
@@ -116,29 +111,8 @@ function scrollThumbnails(direction: number) {
   min-height: 60px;
 }
 
-/* Кастомные стрелки */
-.thumb-nav-btn {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(25%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  min-width: 0;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-}
-
-.thumb-nav-btn:hover {
-  opacity: 1;
-}
-
-.thumb-nav-btn.top {
-  top: 4px;
-}
-
-.thumb-nav-btn.bottom {
-  bottom: 4px;
+.main-image-column {
+  flex-grow: 1;
+  position: relative;
 }
 </style>
