@@ -1,12 +1,14 @@
 <template>
   <v-card variant="flat">
-    <v-img
-      height="285"
-      cover
-      class="rounded-lg"
-      :lazy-src="product.imgs?.at(0)"
-      :src="product.imgs?.at(0)"
-    ></v-img>
+    <v-img height="285" cover class="rounded-lg" :src="product.imgs?.at(0)">
+      <template #placeholder>
+        <v-sheet
+          class="d-flex align-center justify-center fill-height"
+          color="background"
+        >
+        </v-sheet>
+      </template>
+    </v-img>
 
     <v-card-title>
       <span class="text-warning">{{ product.price }} ₽</span>
@@ -22,16 +24,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from "~/assets/types/types";
+import type { Product } from '~/assets/types/types'
 
 const props = defineProps<{
-  product: Product;
-}>();
+  product: Product
+}>()
 
 defineEmits<{
-  (e: "toggle-favorite", id: number): void;
-  (e: "add-to-cart", product: Product): void;
-}>();
+  (e: 'toggle-favorite', id: number): void
+  (e: 'add-to-cart', product: Product): void
+}>()
 </script>
 
 <style scoped></style>

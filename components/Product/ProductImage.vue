@@ -6,11 +6,6 @@
           class="d-flex align-center justify-center fill-height"
           color="background"
         >
-          <v-progress-circular
-            indeterminate
-            color="primary"
-            size="48"
-          ></v-progress-circular>
         </v-sheet>
       </template>
     </v-img>
