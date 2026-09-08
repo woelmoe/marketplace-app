@@ -1,7 +1,12 @@
 <template>
   <v-sheet class="pa-4 mb-4">
     <v-row dense>
-      <v-col v-for="prop in propertiesList" :key="prop.key" cols="12" sm="6">
+      <v-col
+        v-for="prop in props.product.properties"
+        :key="prop.key"
+        cols="12"
+        sm="6"
+      >
         <div class="d-flex flex-column">
           <span class="text-body-2 text-grey">{{ prop.key }}</span>
           <span class="font-weight-medium text-grey-darken-1">{{
@@ -14,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { Product } from '~/assets/types/types'
 
 interface IProps {
@@ -22,17 +26,4 @@ interface IProps {
 }
 
 const props = defineProps<IProps>()
-
-const propertiesList = computed(() => {
-  if (!props.product.properties || !Array.isArray(props.product.properties)) {
-    return []
-  }
-
-  return props.product.properties.map((item) => {
-    return {
-      key: Object.keys(item)[0] as string,
-      value: Object.values(item)[0] as string
-    }
-  })
-})
 </script>

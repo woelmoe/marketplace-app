@@ -26,13 +26,13 @@
 import { ref } from 'vue'
 import ProductCard from './ProductCard.vue'
 import type { Product } from '~/assets/types/types.ts'
-import { mockProducts } from './mockProducts.ts'
 import { useProductsStore } from '~/stores/product.ts'
 
-const { setCurrentProduct } = useProductsStore()
-const products = ref<Product[]>([])
+interface IProps {
+  products: Product[]
+}
 
-onMounted(() => {
-  products.value = mockProducts
-})
+const props = defineProps<IProps>()
+
+const { setCurrentProduct } = useProductsStore()
 </script>

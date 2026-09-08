@@ -5,8 +5,9 @@
     class="app-header background app-linear-gradient"
     height="64"
   >
-    <!-- Кнопка бургер-меню -->
-    <v-app-bar-nav-icon class="text-white" @click="$emit('toggle-drawer')" />
+    <v-app-bar-nav-icon @click="$emit('toggle-drawer')">
+      <v-icon color="header-icons">mdi-menu</v-icon>
+    </v-app-bar-nav-icon>
 
     <HeaderLogo />
 
@@ -20,16 +21,16 @@
 </template>
 
 <script setup lang="ts">
-import HeaderLogo from "./HeaderLogo.vue";
-import HeaderSearch from "./HeaderSearch.vue";
-import HeaderCartButton from "./HeaderCartButton.vue";
-import HeaderProfileButton from "./HeaderProfileButton.vue";
-import ThemeToggle from "./ThemeToggle.vue";
+import HeaderLogo from './HeaderLogo.vue'
+import HeaderSearch from './HeaderSearch.vue'
+import HeaderCartButton from './HeaderCartButton.vue'
+import HeaderProfileButton from './HeaderProfileButton.vue'
+import ThemeToggle from './ThemeToggle.vue'
 
 // Пропсы и эмиты для родителя
 defineEmits<{
-  (e: "toggle-drawer"): void;
-}>();
+  (e: 'toggle-drawer'): void
+}>()
 </script>
 
 <style scoped>
