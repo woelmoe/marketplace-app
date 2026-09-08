@@ -1,6 +1,6 @@
 // nuxt.config.ts
 export default defineNuxtConfig({
-  srcDir: 'frontend/',
+  srcDir: 'app/',
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   app: {
