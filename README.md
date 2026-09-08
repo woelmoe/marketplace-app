@@ -2,13 +2,6 @@
 
 # 🛒 UX-Market — Интернет-магазин на Nuxt + Vuetify + Nest
 
-Автор: Холодняк Никита
-
-Мой Telegram: `@Whiomie`
-
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/@Whiomie)
-
-## Внимание! Это проект-портфолио, и поэтому и фронт, и бэк находятся в одном репозитории. Это допустимо в моем случае, но в нормальных проектах делят фронт и бэк на отдельные репо!
 
 **Современный e-commerce проект с адаптивным дизайном, быстрой производительностью и чистым кодом.**
 
@@ -17,6 +10,14 @@
 [![Vuetify](https://img.shields.io/badge/Vuetify-1867C0?style=for-the-badge&logo=vuetify&logoColor=white)](https://vuetifyjs.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=black)](https://pinia.vuejs.org)
+
+Автор: Холодняк Никита
+
+Мой Telegram: `@Whiomie`
+
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/@Whiomie)
+
+## Внимание! Это проект-портфолио, и поэтому и фронт, и бэк находятся в одном репозитории. Это допустимо в моем случае, но в нормальных проектах делят фронт и бэк на отдельные репо!
 
 </div>
 
