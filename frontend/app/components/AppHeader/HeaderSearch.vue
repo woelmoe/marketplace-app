@@ -1,0 +1,71 @@
+<template>
+  <v-text-field
+    flat
+    v-model="searchQuery"
+    dense
+    hide-details
+    prepend-inner-icon="mdi-magnify"
+    placeholder="Поиск..."
+    style="width: 100%"
+    :class="{ 'field-hover': isHover }"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
+  >
+    <template #prepend-inner>
+      <v-icon class="search-icon">mdi-magnify</v-icon>
+    </template>
+  </v-text-field>
+</template>
+
+<script setup lang="ts">
+import { debounce } from '~/utils/debounce'
+
+const productStore = useProductsStore()
+const { products } = storeToRefs(productStore)
+
+const isHover = ref(false)
+
+const searchQuery = ref('')
+
+const performSearch = (query: string) => {
+  const trimmedQuery = query.trim()
+
+  productApi
+    .search(trimmedQuery)
+    .then((response) => {
+      console.log(response.data)
+      const ids: number[] = response.data
+        .map((item) => item.id)
+        .filter((id): id is number => id !== undefined && id !== null)
+
+      productStore.getProductsByIds(ids)
+    })
+    .catch((error) => {
+      console.error('Ошибка поиска:', error)
+    })
+}
+
+const debouncedSearch = debounce((query: string) => {
+  performSearch(query)
+}, 500)
+
+watch(searchQuery, async (newQuery, oldQuery) => {
+  if (oldQuery && !newQuery) await productStore.getAllProducts()
+  else debouncedSearch(newQuery)
+})
+
+onUnmounted(() => {
+  debouncedSearch.cancel()
+})
+</script>
+
+<style scoped>
+.search-icon {
+  color: rgb(var(--v-theme-header-icons)) !important;
+  transition: all 0.2s ease;
+}
+
+.field-hover :deep(.search-icon) {
+  color: rgb(var(--v-theme-header-icons-active)) !important;
+}
+</style>

@@ -1,0 +1,32 @@
+{
+  "name": "nuxt-vuetify-app",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "start": "nuxt build && nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@pinia/nuxt": "^1.0.2",
+    "axios": "^1.20.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "nuxt": "^4.5.2",
+    "pinia": "^4.0.3",
+    "typeorm": "^1.1.1",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.0",
+    "vuetify": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "eslint": "^10.10.0",
+    "prettier": "^3.9.6",
+    "sass": "^1.104.0"
+  }
+}
