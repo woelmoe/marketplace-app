@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import { debounce } from '~/utils/debounce'
+const router = useRouter()
 
 const productStore = useProductsStore()
-const { products } = storeToRefs(productStore)
 
 const isHover = ref(false)
 
@@ -51,7 +51,10 @@ const debouncedSearch = debounce((query: string) => {
 
 watch(searchQuery, async (newQuery, oldQuery) => {
   if (oldQuery && !newQuery) await productStore.getAllProducts()
-  else debouncedSearch(newQuery)
+  else {
+    router.push('/')
+    debouncedSearch(newQuery)
+  }
 })
 
 onUnmounted(() => {
