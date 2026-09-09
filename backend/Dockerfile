@@ -17,6 +17,8 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
 COPY --from=builder /app/node_modules ./node_modules
+#  НЕ ИСПОЛЬЗУЙТЕ .env прямо в проекте - это плохая практика. В проде строку ниже необходимо удалить
+COPY env.example ./.env
 
 EXPOSE 5000
 

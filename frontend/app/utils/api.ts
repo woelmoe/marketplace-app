@@ -1,9 +1,9 @@
 import type { Product } from '~/assets/types/types'
 
-const API_BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://your-api-domain.com/api'
-    : 'http://localhost:5000'
+const API_BASE_URL = 'http://localhost:5000'
+// process.env.NODE_ENV === 'production'
+// ? 'https://your-api-domain.com/api'
+// : 'http://localhost:5000'
 
 export const apiClient = {
   async get<T>(endpoint: string): Promise<T> {
