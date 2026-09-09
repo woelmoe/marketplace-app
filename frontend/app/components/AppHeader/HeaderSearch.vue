@@ -1,12 +1,12 @@
 <template>
   <v-text-field
-    v-if="!isMobile"
-    dense
     flat
+    v-model="searchQuery"
+    dense
     hide-details
     prepend-inner-icon="mdi-magnify"
     placeholder="Поиск..."
-    width: 100%
+    style="width: 100%"
     :class="{ 'field-hover': isHover }"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
@@ -18,12 +18,45 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useDisplay } from "vuetify";
+import { debounce } from '~/utils/debounce'
 
-const { mobile } = useDisplay();
-const isHover = ref(false);
-const isMobile = computed(() => mobile.value);
+const productStore = useProductsStore()
+const { products } = storeToRefs(productStore)
+
+const isHover = ref(false)
+
+const searchQuery = ref('')
+
+const performSearch = (query: string) => {
+  const trimmedQuery = query.trim()
+
+  productApi
+    .search(trimmedQuery)
+    .then((response) => {
+      console.log(response.data)
+      const ids: number[] = response.data
+        .map((item) => item.id)
+        .filter((id): id is number => id !== undefined && id !== null)
+
+      productStore.getProductsByIds(ids)
+    })
+    .catch((error) => {
+      console.error('Ошибка поиска:', error)
+    })
+}
+
+const debouncedSearch = debounce((query: string) => {
+  performSearch(query)
+}, 500)
+
+watch(searchQuery, async (newQuery, oldQuery) => {
+  if (oldQuery && !newQuery) await productStore.getAllProducts()
+  else debouncedSearch(newQuery)
+})
+
+onUnmounted(() => {
+  debouncedSearch.cancel()
+})
 </script>
 
 <style scoped>

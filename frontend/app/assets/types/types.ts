@@ -1,5 +1,5 @@
 export interface ProductProperty {
-  key: string
+  name: string
   value: string
 }
 

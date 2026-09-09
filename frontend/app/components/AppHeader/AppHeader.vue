@@ -11,12 +11,12 @@
 
     <HeaderLogo />
 
-    <HeaderSearch />
+    <HeaderSearch v-if="!mobile" />
 
+    <v-spacer> </v-spacer>
     <ThemeToggle class="mr-2" />
 
     <HeaderCartButton />
-    <HeaderProfileButton />
   </v-app-bar>
 </template>
 
@@ -24,13 +24,15 @@
 import HeaderLogo from './HeaderLogo.vue'
 import HeaderSearch from './HeaderSearch.vue'
 import HeaderCartButton from './HeaderCartButton.vue'
-import HeaderProfileButton from './HeaderProfileButton.vue'
 import ThemeToggle from './ThemeToggle.vue'
+import { useDisplay } from 'vuetify'
 
 // Пропсы и эмиты для родителя
 defineEmits<{
   (e: 'toggle-drawer'): void
 }>()
+
+const { mobile } = useDisplay()
 </script>
 
 <style scoped>

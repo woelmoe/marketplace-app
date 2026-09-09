@@ -8,11 +8,11 @@ import {
   Delete,
   Query,
   ParseIntPipe,
-  DefaultValuePipe,
-} from '@nestjs/common';
-import { ProductsService } from './products.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+  DefaultValuePipe
+} from '@nestjs/common'
+import { ProductsService } from './products.service'
+import { CreateProductDto } from './dto/create-product.dto'
+import { UpdateProductDto } from './dto/update-product.dto'
 
 @Controller('products')
 export class ProductsController {
@@ -20,15 +20,15 @@ export class ProductsController {
 
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+    return this.productsService.create(createProductDto)
   }
 
   @Get()
   async findAll(
     @Query('limit', new DefaultValuePipe(100), ParseIntPipe) limit: number,
-    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
+    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number
   ) {
-    const { data, total } = await this.productsService.findAll(limit, offset);
+    const { data, total } = await this.productsService.findAll(limit, offset)
     return {
       success: true,
       data,
@@ -36,44 +36,44 @@ export class ProductsController {
         total,
         limit,
         offset,
-        pages: Math.ceil(total / limit),
-      },
-    };
+        pages: Math.ceil(total / limit)
+      }
+    }
   }
 
   @Get('search')
   search(@Query('q') query: string) {
-    return this.productsService.search(query);
+    return this.productsService.search(query)
   }
 
   @Get('filter/price')
   filterByPrice(
     @Query('min', new DefaultValuePipe(0), ParseIntPipe) min: number,
-    @Query('max', new DefaultValuePipe(999999), ParseIntPipe) max: number,
+    @Query('max', new DefaultValuePipe(999999), ParseIntPipe) max: number
   ) {
-    return this.productsService.filterByPrice(min, max);
+    return this.productsService.filterByPrice(min, max)
   }
 
   @Get('favorites')
   getFavorites() {
-    return this.productsService.getFavorites();
+    return this.productsService.getFavorites()
   }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.findOne(id);
+    return this.productsService.findOne(id)
   }
 
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateProductDto: UpdateProductDto,
+    @Body() updateProductDto: UpdateProductDto
   ) {
-    return this.productsService.update(id, updateProductDto);
+    return this.productsService.update(id, updateProductDto)
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.remove(id);
+    return this.productsService.remove(id)
   }
 }

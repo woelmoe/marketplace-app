@@ -1,42 +1,21 @@
 <template>
   <v-main>
+    <HeaderSearch v-if="mobile" />
     <ProductGrid :products />
   </v-main>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Product } from '~/assets/types/types'
+import { useDisplay } from 'vuetify'
+import HeaderSearch from '~/components/AppHeader/HeaderSearch.vue'
 
-const products = ref<Product[]>([])
-const isLoading = ref(false)
+const productStore = useProductsStore()
+const { products } = storeToRefs(productStore)
 
-async function getAllProducts() {
-  isLoading.value = true
-  let currentLoading = 1
-  const limit = 50
-
-  let hasMore = true
-
-  while (hasMore) {
-    let product
-    try {
-      product = await productApi.getById(currentLoading)
-      currentLoading++
-      products.value = [...products.value, product]
-      hasMore = products.value.length < limit
-    } catch (error) {
-      hasMore = false
-      console.log(error)
-    }
-  }
-
-  console.log(`Загружено ${products.value.length} товаров`)
-  isLoading.value = false
-}
+const { mobile } = useDisplay()
 
 onMounted(() => {
-  getAllProducts()
+  productStore.getAllProducts()
 })
 </script>
 

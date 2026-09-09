@@ -2,7 +2,6 @@
   <AppHeader @toggle-drawer="drawer = !drawer" />
 
   <slot />
-
   <AppFooter />
 </template>
 
