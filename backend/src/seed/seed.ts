@@ -31,14 +31,12 @@ async function seed() {
   console.log('📦 Загружаем моковые данные...')
 
   function getImageBase64(imagePath: string): string | null {
-    console.log('getImageBase64')
+    console.log('getImageBase64', process.cwd())
 
     try {
       const fullPath = path.join(
         process.cwd(),
-        'src',
         'uploads',
-        'products',
         path.basename(imagePath)
       )
 
