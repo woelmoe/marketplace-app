@@ -128,7 +128,7 @@ yarn back       # запустить бэкенд
 
 - Frontend — http://localhost:3000
 - Backend — http://localhost:5000
-- PostgreSQL — localhost:5432
+- PostgreSQL — http://localhost:5432
 
 ---
 
