@@ -1,5 +1,5 @@
 <template>
-  <v-container class="contacts-page" max-width="1000">
+  <v-container class="contacts-page selectable" max-width="1000">
     <h1 class="text-h4 mb-2">Контакты</h1>
     <p class="text-body-1 text-medium-emphasis mb-8">
       Открыт к предложениям, сотрудничеству и интересным проектам!
@@ -24,6 +24,12 @@ import { aboutBlocks } from '~/components/Contacts/data'
 </script>
 
 <style scoped>
+.selectable,
+.selectable * {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
 .contacts-page {
   padding-top: 24px;
   padding-bottom: 48px;

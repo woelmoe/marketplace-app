@@ -39,8 +39,6 @@ withDefaults(defineProps<IProps>(), { isLast: false })
 
 <style scoped lang="scss">
 .about-block {
-  user-select: text;
-
   &:last-child {
     border-bottom: none !important;
     padding-bottom: 0 !important;
