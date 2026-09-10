@@ -48,22 +48,25 @@
         В корзину
       </v-btn>
 
-      <div v-else class="d-flex align-center ga-2">
+      <div v-else class="d-flex align-center ga-2 flex-grow-1">
         <v-btn
-          icon
-          size="small"
+          size="large"
+          rounded="0"
           variant="tonal"
+          class="stepper-btn flex-grow-1 rounded-md"
           @click="cart.decrement(product.id)"
         >
           <v-icon size="20">mdi-minus</v-icon>
         </v-btn>
 
-        <span class="quantity">{{ cart.itemById(product.id)?.quantity }}</span>
+        <span class="quantity text-center">
+          {{ cart.itemById(product.id)?.quantity }}
+        </span>
 
         <v-btn
-          icon
-          size="small"
+          size="large"
           variant="tonal"
+          class="stepper-btn flex-grow-1 rounded-md"
           @click="cart.increment(product.id)"
         >
           <v-icon size="20">mdi-plus</v-icon>
@@ -77,7 +80,6 @@
 import { computed, ref } from 'vue'
 import type { Product } from '~/assets/types/types'
 import ThumbNavButton from './ThumbNavButton.vue'
-import { usePriceFormat } from '../Cart/composables/usePriceFormat.ts'
 
 interface IProps {
   product: Product | undefined
@@ -86,7 +88,6 @@ interface IProps {
 const props = defineProps<IProps>()
 
 const cart = useCartStore()
-const { formatPrice } = usePriceFormat()
 
 const selectedIndex = ref(0)
 const thumbnailsContainer = ref<HTMLElement | null>(null)
@@ -168,11 +169,6 @@ function scrollThumbnails(direction: number) {
   flex-shrink: 0;
   height: calc((100% - 20px) / 6);
   min-height: 60px;
-}
-
-.main-image-column {
-  flex-grow: 1;
-  position: relative;
 }
 
 .quantity {
