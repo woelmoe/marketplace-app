@@ -67,8 +67,7 @@ const onCheckout = async () => {
   isSubmitting.value = true
 
   try {
-    // TODO: заменить на реальный вызов API
-    // await orderApi.create({ items: cart.items, total: cart.totalPrice })
+    // НЕ БУДЕТ РЕАЛИЗОВАНО: заменить на реальный вызов API
     await new Promise((r) => setTimeout(r, 700))
 
     cart.clear()

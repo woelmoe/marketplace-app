@@ -25,8 +25,10 @@
 
     <v-btn
       color="primary"
+      variant="flat"
       size="large"
       block
+      style="width: 100%"
       :loading="loading"
       @click="emit('checkout')"
     >
