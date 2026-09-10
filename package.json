@@ -1,0 +1,8 @@
+{
+  "name": "marketplace-app",
+  "scripts": {
+    "start": "docker compose up -d",
+    "front": "cd frontend && yarn dev",
+    "back": "cd backend && yarn dev"
+  }
+}

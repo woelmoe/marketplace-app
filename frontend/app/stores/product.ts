@@ -26,6 +26,7 @@ export const useProductsStore = defineStore('products', () => {
     })
   }
 
+  // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
   async function getAllProducts() {
     products.value = []
     isLoading.value = true

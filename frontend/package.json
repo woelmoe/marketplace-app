@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "nuxt build && nuxt preview",
+    "show": "docker compose up -d",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
