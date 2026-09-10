@@ -28,18 +28,20 @@ import { storeToRefs } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 import { useProductsStore } from '~/stores/product'
 
-const router = useRouter()
-
-const store = useProductsStore()
-const { currentProduct } = storeToRefs(store)
-const { setCurrentProduct } = store
+const productStore = useProductsStore()
+const { currentProduct } = storeToRefs(productStore)
+const { setCurrentProduct } = productStore
 
 const selectedImageIndex = ref(0)
+
+async function setProductFromApi(id: number) {
+  const product = await productApi.getById(id)
+  setCurrentProduct(product)
+}
 
 function setProductFromLocalStorage() {
   const productStr = localStorage.getItem(LocalStorageKeys.currentProduct)
   if (!productStr) {
-    router.push('/')
     return
   }
 
@@ -47,12 +49,16 @@ function setProductFromLocalStorage() {
   setCurrentProduct(value)
 }
 
-onMounted(() => {
-  setProductFromLocalStorage()
-})
-
 watch(currentProduct, () => {
   selectedImageIndex.value = 0
+})
+
+onMounted(() => {
+  if (currentProduct.value) {
+    setProductFromApi
+  } else {
+    setProductFromLocalStorage()
+  }
 })
 </script>
 

@@ -9,6 +9,14 @@ export const useProductsStore = defineStore('products', () => {
 
   const cachedProducts = ref<Product[]>([])
 
+  const abortController = ref<AbortController | null>(null)
+
+  function cancelLoading() {
+    abortController.value?.abort()
+    abortController.value = null
+    isLoading.value = false
+  }
+
   function setCurrentProduct(value: Product) {
     currentProduct.value = value
     const lsValue = JSON.stringify(value)
@@ -31,30 +39,39 @@ export const useProductsStore = defineStore('products', () => {
 
   // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
   async function getAllProducts() {
+    cancelLoading() // отменяем прошлую загрузку, если была
+    abortController.value = new AbortController()
+    const signal = abortController.value.signal
+
     products.value = cachedProducts.value
-
     isLoading.value = true
-    let currentLoading = 1
-    const limit = 50
 
+    let currentId = 1
+    const limit = 50
     let hasMore = true
 
-    while (hasMore) {
-      let product
+    while (hasMore && !signal.aborted) {
       try {
-        product = await productApi.getById(currentLoading)
-        currentLoading++
+        const product = await productApi.getById(currentId, signal)
+        currentId++
         products.value = [...products.value, product]
         hasMore = products.value.length < limit
+        if (products.value.length < CACHED_LIMIT) {
+          cachedProducts.value = products.value.slice(
+            0,
+            products.value.length - 1
+          )
+        }
       } catch (error) {
+        // AbortError — это не ошибка, а наша отмена, не логируем
+        if (signal.aborted) return
         hasMore = false
-        console.log(error)
+        console.error(error)
       }
     }
 
-    cachedProducts.value = products.value.slice(0, CACHED_LIMIT)
+    if (signal.aborted) return
 
-    console.log(`Загружено ${products.value.length} товаров`)
     isLoading.value = false
   }
 
@@ -65,6 +82,7 @@ export const useProductsStore = defineStore('products', () => {
     currentProduct,
     setCurrentProduct,
     getAllProducts,
-    getProductsByIds
+    getProductsByIds,
+    cancelLoading
   }
 })
