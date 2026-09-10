@@ -28,6 +28,10 @@ onMounted(() => {
   productStore.getAllProducts()
   waitTimeoutLoading()
 })
+
+onUnmounted(() => {
+  productStore.cancelLoading()
+})
 </script>
 
 <style scoped></style>

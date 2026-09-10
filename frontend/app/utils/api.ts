@@ -6,12 +6,13 @@ const API_BASE_URL = 'http://localhost:5000'
 // : 'http://localhost:5000'
 
 export const apiClient = {
-  async get<T>(endpoint: string): Promise<T> {
+  async get<T>(endpoint: string, signal?: AbortSignal): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      signal
     })
 
     if (!response.ok) {
@@ -21,13 +22,18 @@ export const apiClient = {
     return response.json()
   },
 
-  async post<T>(endpoint: string, data?: any): Promise<T> {
+  async post<T>(
+    endpoint: string,
+    data?: any,
+    signal?: AbortSignal
+  ): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      signal
     })
 
     if (!response.ok) {
@@ -37,13 +43,14 @@ export const apiClient = {
     return response.json()
   },
 
-  async put<T>(endpoint: string, data?: any): Promise<T> {
+  async put<T>(endpoint: string, data?: any, signal?: AbortSignal): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      signal
     })
 
     if (!response.ok) {
@@ -53,12 +60,13 @@ export const apiClient = {
     return response.json()
   },
 
-  async delete<T>(endpoint: string): Promise<T> {
+  async delete<T>(endpoint: string, signal?: AbortSignal): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      signal
     })
 
     if (!response.ok) {
@@ -71,44 +79,62 @@ export const apiClient = {
 
 export const productApi = {
   // Получить все товары
-  getAll: () =>
-    apiClient.get<{ success: boolean; data: Product[] }>('/products'),
+  getAll: (signal?: AbortSignal) =>
+    apiClient.get<{ success: boolean; data: Product[] }>('/products', signal),
 
   // Получить товар по ID
-  getById: (id: number) => apiClient.get<Product>(`/products/${id}`),
+  getById: (id: number, signal?: AbortSignal) =>
+    apiClient.get<Product>(`/products/${id}`, signal),
 
   // Создать товар
-  create: (data: Partial<Product>) =>
-    apiClient.post<{ success: boolean; data: Product }>('/products', data),
+  create: (data: Partial<Product>, signal?: AbortSignal) =>
+    apiClient.post<{ success: boolean; data: Product }>(
+      '/products',
+      data,
+      signal
+    ),
 
   // Обновить товар
-  update: (id: number, data: Partial<Product>) =>
-    apiClient.put<{ success: boolean; data: Product }>(`/products/${id}`, data),
+  update: (id: number, data: Partial<Product>, signal?: AbortSignal) =>
+    apiClient.put<{ success: boolean; data: Product }>(
+      `/products/${id}`,
+      data,
+      signal
+    ),
 
   // Удалить товар
-  delete: (id: number) =>
-    apiClient.delete<{ success: boolean; message: string }>(`/products/${id}`),
+  delete: (id: number, signal?: AbortSignal) =>
+    apiClient.delete<{ success: boolean; message: string }>(
+      `/products/${id}`,
+      signal
+    ),
 
   // Поиск товаров
-  search: (query: string) =>
+  search: (query: string, signal?: AbortSignal) =>
     apiClient.get<{ success: boolean; data: Product[] }>(
-      `/products/search?q=${encodeURIComponent(query)}`
+      `/products/search?q=${encodeURIComponent(query)}`,
+      signal
     ),
 
   // Фильтр по цене
-  filterByPrice: (min: number, max: number) =>
+  filterByPrice: (min: number, max: number, signal?: AbortSignal) =>
     apiClient.get<{ success: boolean; data: Product[] }>(
-      `/products/filter/price?min=${min}&max=${max}`
+      `/products/filter/price?min=${min}&max=${max}`,
+      signal
     ),
 
   // Получить избранные товары (в корзине)
-  getFavorites: () =>
-    apiClient.get<{ success: boolean; data: Product[] }>('/products/favorites'),
+  getFavorites: (signal?: AbortSignal) =>
+    apiClient.get<{ success: boolean; data: Product[] }>(
+      '/products/favorites',
+      signal
+    ),
 
   // Массовое создание товаров (для мок-данных)
-  createMany: (products: Product[]) =>
+  createMany: (products: Product[], signal?: AbortSignal) =>
     apiClient.post<{ success: boolean; data: Product[]; errors?: any[] }>(
       '/products/batch',
-      { products }
+      { products },
+      signal
     )
 }

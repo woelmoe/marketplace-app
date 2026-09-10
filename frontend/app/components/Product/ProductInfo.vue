@@ -12,6 +12,8 @@
         {{ product.title }}
       </h1>
 
+      <ProductPrice :product class="mt-40" price-class="text-title-medium text-warning" />
+
       <div class="d-flex align-center mb-4">
         <v-rating
           :model-value="product.rating"
@@ -20,7 +22,6 @@
           size="20"
           color="warning"
         />
-        <!-- Используем вычисляемое свойство -->
         <span class="text-body-2 text-grey ml-2">
           {{ ratingText }}
         </span>
