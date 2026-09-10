@@ -4,8 +4,16 @@
   <div class="grid">
     <ProductGrid :products />
 
+    <v-progress-circular
+      v-if="isLoading"
+      indeterminate
+      color="primary"
+      size="64"
+      class="loader"
+    />
+
     <v-empty-state
-      v-if="!isLoading && products.length === 0"
+      v-else-if="!products.length"
       icon="mdi-file-search-outline"
       title="Товары не найдены"
       text="Попробуйте изменить параметры поиска или фильтра"
@@ -42,5 +50,10 @@ $offset-top: 0px;
 
 .grid {
   margin-top: 40px;
+}
+
+.loader {
+  display: block;
+  margin: 80px auto;
 }
 </style>
