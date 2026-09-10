@@ -1,21 +1,21 @@
 <template>
   <div class="d-flex align-baseline ga-2">
     <span :class="priceClass">
-      {{ formatPrice(price) }}
+      {{ formatPrice(product.price) }}
     </span>
 
-    <s v-if="oldPrice" :class="oldPriceClass">
-      {{ formatPrice(oldPrice) }}
+    <s v-if="product.old_price" :class="oldPriceClass">
+      {{ formatPrice(product.old_price) }}
     </s>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Product } from '~/assets/types/types'
 import { usePriceFormat } from '../Cart/composables/usePriceFormat'
 
 interface IProps {
-  price: number
-  oldPrice?: number
+  product: Product
   priceClass?: string
   oldPriceClass?: string
 }

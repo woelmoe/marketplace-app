@@ -15,11 +15,7 @@
         </template>
       </v-img>
 
-      <ProductPrice
-        :price="product.price"
-        :old-price="product.old_price"
-        class="justify-center"
-      />
+      <ProductPrice :product class="justify-center" />
       <v-card-subtitle>{{ product.title }}</v-card-subtitle>
     </NuxtLink>
 

@@ -35,16 +35,16 @@
       </v-col>
     </v-row>
 
-    <div v-if="product" class="d-flex align-center justify-space-between mt-10">
-
+    <div v-if="product" class="d-flex align-center justify-end mt-10">
       <v-btn
         v-if="!inCart"
         color="primary"
         size="large"
+        style="width: 100%"
         variant="flat"
         @click="onAddToCart"
       >
-        <v-icon size="20" class="mr-2">mdi-cart-plus</v-icon>
+        <v-icon color="icon" size="20" class="mr-2">mdi-cart-plus</v-icon>
         В корзину
       </v-btn>
 
