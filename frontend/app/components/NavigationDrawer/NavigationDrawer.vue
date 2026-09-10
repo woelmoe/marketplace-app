@@ -7,7 +7,7 @@
         @click="navigateTo(item.route)"
       >
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon color="icon">{{ item.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>

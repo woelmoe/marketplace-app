@@ -25,5 +25,9 @@ const layout = computed(() => {
   return layouts[layoutName] || DefaultLayout
 })
 
-import { ref } from 'vue'
+const cart = useCartStore()
+
+onMounted(() => {
+  cart.hydrate()
+})
 </script>

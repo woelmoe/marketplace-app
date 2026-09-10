@@ -4,7 +4,7 @@ export interface ProductProperty {
 }
 
 export interface Product {
-  id?: number
+  id: number
   title: string
   price: number
   properties?: ProductProperty[]

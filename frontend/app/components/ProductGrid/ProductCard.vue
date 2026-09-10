@@ -24,7 +24,13 @@
       <v-card-subtitle>{{ product.title }}</v-card-subtitle>
     </NuxtLink>
 
-    <v-btn class="mt-1" width="100%" color="primary" variant="flat">
+    <v-btn
+      class="mt-1"
+      width="100%"
+      color="primary"
+      variant="flat"
+      @click.stop="onAddToCart"
+    >
       <v-icon icon="mdi-cart" class="mr-2"></v-icon>
       <span class="text-white">{{
         $dayjs(product.delivery_date).format('D MMMM')
@@ -36,15 +42,22 @@
 <script setup lang="ts">
 import type { Product } from '~/assets/types/types'
 
-const props = defineProps<{
+interface IProps {
   product: Product
-}>()
-
-defineEmits<{
-  (e: 'add-to-cart', product: Product): void
-}>()
+}
+const props = defineProps<IProps>()
 
 const { setCurrentProduct } = useProductsStore()
+const cart = useCartStore()
+
+const onAddToCart = () => {
+  cart.add({
+    id: props.product.id,
+    name: props.product.title,
+    price: props.product.price,
+    image: props.product.imgs?.at(0)
+  })
+}
 </script>
 
 <style scoped></style>
