@@ -14,7 +14,16 @@ export const products = [
       { name: 'Подушки', value: '2 шт' },
       { name: 'Цвет', value: 'Черный' }
     ],
-    imgs: ['/uploads/products/2.jpg', '/uploads/products/1.jpg']
+    imgs: [
+      '/uploads/products/2.jpg',
+      '/uploads/products/1.jpg',
+      '/uploads/products/2.jpg',
+      '/uploads/products/1.jpg',
+      '/uploads/products/2.jpg',
+      '/uploads/products/1.jpg',
+      '/uploads/products/2.jpg',
+      '/uploads/products/1.jpg'
+    ]
   },
   {
     title: 'Игровое кресло с подставкой для ног черное/красное',
@@ -32,6 +41,12 @@ export const products = [
       { name: 'Цвет', value: 'Черный/Красный' }
     ],
     imgs: [
+      '/uploads/products/2.jpg',
+      '/uploads/products/5.jpg',
+      '/uploads/products/4.jpg',
+      '/uploads/products/2.jpg',
+      '/uploads/products/5.jpg',
+      '/uploads/products/4.jpg',
       '/uploads/products/2.jpg',
       '/uploads/products/5.jpg',
       '/uploads/products/4.jpg'

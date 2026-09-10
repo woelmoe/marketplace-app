@@ -1,89 +1,110 @@
 import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 import type { ICartItem } from '~/components/Carts/types'
 
 const STORAGE_KEY = 'cart'
 
-export const useCartStore = defineStore('cart', {
-  state: () => ({
-    items: [] as ICartItem[]
-  }),
+export const useCartStore = defineStore('cart', () => {
+  // ---- state ----
+  const items = ref<ICartItem[]>([])
 
-  getters: {
-    count: (state) => state.items.reduce((sum, i) => sum + i.quantity, 0),
+  // ---- getters ----
+  const count = computed(() =>
+    items.value.reduce((sum, i) => sum + i.quantity, 0)
+  )
 
-    totalPrice: (state) =>
-      state.items.reduce((sum, i) => sum + i.price * i.quantity, 0),
+  const totalPrice = computed(() =>
+    items.value.reduce((sum, i) => sum + i.price * i.quantity, 0)
+  )
 
-    isEmpty: (state) => state.items.length === 0,
+  const isEmpty = computed(() => items.value.length === 0)
 
-    itemById: (state) => (id: ICartItem['id']) =>
-      state.items.find((i) => i.id === id)
-  },
+  const itemById = computed(
+    () => (id: ICartItem['id']) => items.value.find((i) => i.id === id)
+  )
 
-  actions: {
-    add(product: Omit<ICartItem, 'quantity'>, quantity = 1) {
-      const existing = this.items.find((i) => i.id === product.id)
-
-      if (existing) {
-        existing.quantity += quantity
-      } else {
-        this.items.push({ ...product, quantity })
-      }
-
-      this.persist()
-    },
-
-    remove(id: ICartItem['id']) {
-      this.items = this.items.filter((i) => i.id !== id)
-      this.persist()
-    },
-
-    setQuantity(id: ICartItem['id'], quantity: number) {
-      const item = this.items.find((i) => i.id === id)
-      if (!item) return
-
-      if (quantity <= 0) {
-        this.remove(id)
-        return
-      }
-
-      item.quantity = quantity
-      this.persist()
-    },
-
-    increment(id: ICartItem['id']) {
-      const item = this.items.find((i) => i.id === id)
-      if (item) this.setQuantity(id, item.quantity + 1)
-    },
-
-    decrement(id: ICartItem['id']) {
-      const item = this.items.find((i) => i.id === id)
-      if (item) this.setQuantity(id, item.quantity - 1)
-    },
-
-    clear() {
-      this.items = []
-      this.persist()
-    },
-
-    // Персистентность
-    persist() {
-      if (import.meta.client) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.items))
-      }
-    },
-
-    hydrate() {
-      if (!import.meta.client) return
-
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (!raw) return
-
-      try {
-        this.items = JSON.parse(raw) as ICartItem[]
-      } catch {
-        this.items = []
-      }
+  // ---- helpers ----
+  const persist = () => {
+    if (import.meta.client) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items.value))
     }
+  }
+
+  // ---- actions ----
+  const add = (product: Omit<ICartItem, 'quantity'>, quantity = 1) => {
+    const existing = items.value.find((i) => i.id === product.id)
+
+    if (existing) {
+      existing.quantity += quantity
+    } else {
+      items.value.push({ ...product, quantity })
+    }
+
+    persist()
+  }
+
+  const remove = (id: ICartItem['id']) => {
+    items.value = items.value.filter((i) => i.id !== id)
+    persist()
+  }
+
+  const setQuantity = (id: ICartItem['id'], quantity: number) => {
+    const item = items.value.find((i) => i.id === id)
+    if (!item) return
+
+    if (quantity <= 0) {
+      remove(id)
+      return
+    }
+
+    item.quantity = quantity
+    persist()
+  }
+
+  const increment = (id: ICartItem['id']) => {
+    const item = items.value.find((i) => i.id === id)
+    if (item) setQuantity(id, item.quantity + 1)
+  }
+
+  const decrement = (id: ICartItem['id']) => {
+    const item = items.value.find((i) => i.id === id)
+    if (item) setQuantity(id, item.quantity - 1)
+  }
+
+  const clear = () => {
+    items.value = []
+    persist()
+  }
+
+  const hydrate = () => {
+    if (!import.meta.client) return
+
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return
+
+    try {
+      items.value = JSON.parse(raw) as ICartItem[]
+    } catch {
+      items.value = []
+    }
+  }
+
+  return {
+    // state
+    items,
+    // getters
+    count,
+    totalPrice,
+    isEmpty,
+    itemById,
+    // actions
+    add,
+    remove,
+    setQuantity,
+    increment,
+    decrement,
+    clear,
+    persist,
+    hydrate
   }
 })

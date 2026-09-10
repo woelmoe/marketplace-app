@@ -6,6 +6,9 @@ import { products } from './mockData'
 import * as fs from 'fs'
 import * as path from 'path'
 
+// docker-compose exec postgres psql -U user -d mydb -c "TRUNCATE TABLE products RESTART IDENTITY;"
+// docker compose up -d backend
+
 seed().catch((error) => {
   console.error('❌ Ошибка при сидировании:', error)
   process.exit(1)
