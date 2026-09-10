@@ -2,9 +2,10 @@ import { defineStore } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 
 export const useProductsStore = defineStore('products', () => {
+  const CACHED_LIMIT = 18
   const products = ref<Product[]>([])
   const currentProduct = ref<Product>()
-  const isLoading = ref(false)
+  const isLoading = ref(true)
 
   const cachedProducts = ref<Product[]>([])
 
@@ -51,7 +52,7 @@ export const useProductsStore = defineStore('products', () => {
       }
     }
 
-    cachedProducts.value = products.value.slice(0, 15)
+    cachedProducts.value = products.value.slice(0, CACHED_LIMIT)
 
     console.log(`Загружено ${products.value.length} товаров`)
     isLoading.value = false
