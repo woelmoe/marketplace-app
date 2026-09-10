@@ -24,23 +24,39 @@ export const useProductsStore = defineStore('products', () => {
     const lsValue = JSON.stringify(value)
     localStorage.setItem(LocalStorageKeys.currentProduct, lsValue)
   }
-
   async function getProductsByIds(ids?: number[]) {
+    cancelLoading()
+
+    if (!ids?.length) {
+      products.value = []
+      isLoading.value = false
+      return
+    }
+
+    abortController.value = new AbortController()
+    const signal = abortController.value.signal
+
     isLoading.value = true
     products.value = []
-    cachedProducts.value = []
 
-    ids?.forEach(async (id) => {
-      let product
-      try {
-        product = await productApi.getById(id)
-        products.value = [...products.value, product]
-      } catch (error) {
-        console.log(error)
+    try {
+      const results = await Promise.all(
+        ids.map((id) =>
+          productApi.getById(id, signal).catch((error) => {
+            if (!signal.aborted) console.error(error)
+            return null
+          })
+        )
+      )
+
+      if (signal.aborted) return
+
+      products.value = results.filter((p): p is Product => p !== null)
+    } finally {
+      if (!signal.aborted) {
+        isLoading.value = false
       }
-    })
-
-    isLoading.value = false
+    }
   }
 
   // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
@@ -51,7 +67,7 @@ export const useProductsStore = defineStore('products', () => {
     abortController.value = new AbortController()
     const signal = abortController.value.signal
 
-    products.value = cachedProducts.value
+    // products.value = cachedProducts.value
 
     let currentId = 1
     const limit = 50
