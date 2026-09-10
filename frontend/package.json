@@ -17,6 +17,8 @@
     "axios": "^1.20.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "dayjs": "^1.11.23",
+    "dayjs-nuxt": "2.1.11",
     "nuxt": "^4.5.2",
     "pinia": "^4.0.3",
     "typeorm": "^1.1.1",
