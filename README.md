@@ -115,11 +115,8 @@
 git clone https://github.com/your-username/ux-market.git
 cd ux-market
 
-# 2. Установить зависимости (frontend + backend)
-yarn install
-
 # 3. Запустить всё
-yarn start      # поднять PostgreSQL в Docker
+yarn start      # поднять Docker-контейнеры и запустить приложение на localhost
 yarn front      # запустить фронтенд
 yarn back       # запустить бэкенд
 ```
