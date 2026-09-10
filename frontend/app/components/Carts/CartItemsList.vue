@@ -16,16 +16,13 @@
     </v-card>
 
     <div class="d-flex justify-space-between mt-4">
-      <v-btn variant="text" prepend-icon="mdi-arrow-left" to="/">
+      <v-btn variant="text" to="/">
+        <v-icon color="icon" class="mr-2" size="20">mdi-arrow-left</v-icon>
         Продолжить покупки
       </v-btn>
 
-      <v-btn
-        variant="text"
-        color="error"
-        prepend-icon="mdi-trash-can-outline"
-        @click="emit('clear')"
-      >
+      <v-btn variant="text" color="error" @click="emit('clear')">
+        <v-icon color="error" class="mr-2" size="20">mdi-trash-can-outline</v-icon>
         Очистить корзину
       </v-btn>
     </div>

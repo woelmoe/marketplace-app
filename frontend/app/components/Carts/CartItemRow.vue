@@ -17,30 +17,35 @@
     <template #append>
       <div class="d-flex align-center ga-2">
         <v-btn
-          icon="mdi-minus"
+          icon
           size="small"
           variant="text"
           :disabled="item.quantity <= 1"
           @click="emit('decrement', item.id)"
-        />
+        >
+          <v-icon color="icon" size="20">mdi-minus</v-icon>
+        </v-btn>
 
         <span class="quantity">{{ item.quantity }}</span>
 
         <v-btn
-          icon="mdi-plus"
+          icon
           size="small"
           variant="text"
           @click="emit('increment', item.id)"
-        />
+        >
+          <v-icon color="icon" size="20">mdi-plus</v-icon>
+        </v-btn>
 
         <v-btn
-          icon="mdi-delete-outline"
+          icon
           size="small"
           variant="text"
-          color="error"
           class="ml-2"
           @click="emit('remove', item.id)"
-        />
+        >
+          <v-icon color="error" size="20">mdi-delete-outline</v-icon>
+        </v-btn>
       </div>
     </template>
   </v-list-item>
