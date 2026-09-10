@@ -39,7 +39,7 @@ export const useProductsStore = defineStore('products', () => {
 
   // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
   async function getAllProducts() {
-    cancelLoading() // отменяем прошлую загрузку, если была
+    cancelLoading()
     abortController.value = new AbortController()
     const signal = abortController.value.signal
 
@@ -63,7 +63,6 @@ export const useProductsStore = defineStore('products', () => {
           )
         }
       } catch (error) {
-        // AbortError — это не ошибка, а наша отмена, не логируем
         if (signal.aborted) return
         hasMore = false
         console.error(error)
