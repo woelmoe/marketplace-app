@@ -11,7 +11,7 @@
 
     <HeaderLogo />
 
-    <HeaderSearch v-if="!mobile" />
+    <SearchInput v-if="!mobile" v-model="searchQuery" style="width: 100%" />
 
     <v-spacer> </v-spacer>
     <ThemeToggle class="mr-2" />
@@ -22,15 +22,16 @@
 
 <script setup lang="ts">
 import HeaderLogo from './HeaderLogo.vue'
-import HeaderSearch from './HeaderSearch.vue'
 import HeaderCartButton from './HeaderCartButton.vue'
 import ThemeToggle from './ThemeToggle.vue'
 import { useDisplay } from 'vuetify'
+import { useProductSearch } from '~/components/SearchInput/useProductSearch'
 
-// Пропсы и эмиты для родителя
 defineEmits<{
   (e: 'toggle-drawer'): void
 }>()
+
+const { searchQuery } = useProductSearch()
 
 const { mobile } = useDisplay()
 </script>

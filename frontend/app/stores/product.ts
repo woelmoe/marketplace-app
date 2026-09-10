@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import { LocalStorageKeys, type Product } from '~/assets/types/types'
 
 export const useProductsStore = defineStore('products', () => {
+  let isFirstFetch = true
+
+  const searchQuery = ref('')
   const CACHED_LIMIT = 18
   const products = ref<Product[]>([])
   const currentProduct = ref<Product>()
@@ -14,7 +17,6 @@ export const useProductsStore = defineStore('products', () => {
   function cancelLoading() {
     abortController.value?.abort()
     abortController.value = null
-    isLoading.value = false
   }
 
   function setCurrentProduct(value: Product) {
@@ -24,7 +26,9 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   async function getProductsByIds(ids?: number[]) {
+    isLoading.value = true
     products.value = []
+    cachedProducts.value = []
 
     ids?.forEach(async (id) => {
       let product
@@ -35,16 +39,19 @@ export const useProductsStore = defineStore('products', () => {
         console.log(error)
       }
     })
+
+    isLoading.value = false
   }
 
   // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
   async function getAllProducts() {
-    cancelLoading() // отменяем прошлую загрузку, если была
+    isLoading.value = true
+    cancelLoading()
+
     abortController.value = new AbortController()
     const signal = abortController.value.signal
 
     products.value = cachedProducts.value
-    isLoading.value = true
 
     let currentId = 1
     const limit = 50
@@ -63,7 +70,6 @@ export const useProductsStore = defineStore('products', () => {
           )
         }
       } catch (error) {
-        // AbortError — это не ошибка, а наша отмена, не логируем
         if (signal.aborted) return
         hasMore = false
         console.error(error)
@@ -76,6 +82,8 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   return {
+    isFirstFetch,
+    searchQuery,
     isLoading,
     products,
     cachedProducts,
