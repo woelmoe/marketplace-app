@@ -15,12 +15,11 @@
         </template>
       </v-img>
 
-      <v-card-title>
-        <span class="text-warning">{{ product.price }} ₽</span>
-        <s class="text-title-small pl-2 text-primary"
-          >{{ product.old_price }} ₽</s
-        >
-      </v-card-title>
+      <ProductPrice
+        :price="product.price"
+        :old-price="product.old_price"
+        class="justify-center"
+      />
       <v-card-subtitle>{{ product.title }}</v-card-subtitle>
     </NuxtLink>
 
