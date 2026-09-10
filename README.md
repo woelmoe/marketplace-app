@@ -108,45 +108,27 @@
 - Yarn ≥ 1.22
 - Docker Desktop (для БД)
 
-### Frontend
+### Команды
 
 ```bash
 # 1. Клонировать репозиторий
 git clone https://github.com/your-username/ux-market.git
 cd ux-market
 
-# 2. Установить зависимости
+# 2. Установить зависимости (frontend + backend)
 yarn install
 
-# 3. Запустить dev-сервер
-yarn dev
-
-# 4. Открыть в браузере
-# http://localhost:3000
+# 3. Запустить всё
+yarn start      # поднять PostgreSQL в Docker
+yarn front      # запустить фронтенд
+yarn back       # запустить бэкенд
 ```
 
-### Backend
+После запуска:
 
-```bash
-# Перейти в папку бэкенда
-cd backend
-
-# Установить зависимости
-yarn install
-
-# Запустить в режиме разработки
-yarn start:dev
-```
-
-### База данных (Docker)
-
-```bash
-# Поднять PostgreSQL в контейнере
-docker compose up -d
-
-# Остановить
-docker compose down
-```
+- Frontend — http://localhost:3000
+- Backend — http://localhost:5000
+- PostgreSQL — localhost:5432
 
 ---
 
