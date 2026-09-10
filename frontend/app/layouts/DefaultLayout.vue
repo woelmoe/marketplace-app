@@ -1,6 +1,6 @@
 <template>
+  <NavigationDrawer v-model="drawer" />
   <AppHeader @toggle-drawer="drawer = !drawer" />
-
   <slot />
   <AppFooter />
 </template>

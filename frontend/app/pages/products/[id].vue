@@ -1,27 +1,25 @@
 <template>
-  <v-main>
-    <v-container class="product-page">
-      <v-row>
-        <v-col cols="12" md="5">
-          <ProductGallery :product="currentProduct" />
-        </v-col>
+  <v-container class="product-page">
+    <v-row>
+      <v-col cols="12" md="5">
+        <ProductGallery :product="currentProduct" />
+      </v-col>
 
-        <v-col cols="12" md="6">
-          <div v-if="!currentProduct">
-            <v-skeleton-loader
-              type="heading, text, image, paragraph"
-              class="mb-4"
-            ></v-skeleton-loader>
-          </div>
+      <v-col cols="12" md="6">
+        <div v-if="!currentProduct">
+          <v-skeleton-loader
+            type="heading, text, image, paragraph"
+            class="mb-4"
+          ></v-skeleton-loader>
+        </div>
 
-          <template v-else>
-            <ProductInfo :product="currentProduct" />
-            <ProductProperties :product="currentProduct" />
-          </template>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+        <template v-else>
+          <ProductInfo :product="currentProduct" />
+          <ProductProperties :product="currentProduct" />
+        </template>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">

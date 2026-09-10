@@ -1,39 +1,18 @@
 <template>
   <v-footer height="35" class="d-flex app-linear-gradient" app>
-    <span class="text-body-small"> {{ APP_NAME }} &copy; {{ new Date().getFullYear() }} </span>
+    <span class="text-body-small">
+      {{ APP_NAME }} &copy; {{ new Date().getFullYear() }}
+    </span>
     <span class="text-label-small pl-4">
       Портфолио-сайт разработан: {{ AUTHOR }} tg:
-      <span class="tg-link" :class="{ clicked: isCopied }" @click="onClickTg">
-        {{ AUTHOR_TG }}
-      </span>
+      <CopyableContact :title="AUTHOR_TG" />
     </span>
   </v-footer>
-
-  <v-snackbar
-    v-model="isCopied"
-    timeout="1500"
-    color="success"
-    location="bottom"
-    style="opacity: 0.9"
-  >
-    Никнейм скопирован!
-    <template v-slot:actions>
-      <v-btn color="white" variant="text" @click="isCopied = false">OK</v-btn>
-    </template>
-  </v-snackbar>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { APP_NAME, AUTHOR, AUTHOR_TG } from '~/assets/types/CommonDefinitions'
-import { copyToClipboard } from '~/utils/copyToClipboard'
-
-const isCopied = ref(false)
-
-function onClickTg() {
-  copyToClipboard()
-  isCopied.value = true
-}
+import CopyableContact from '../Contacts/CopyableContact.vue'
 </script>
 
 <style scoped>
