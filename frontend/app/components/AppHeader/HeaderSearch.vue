@@ -1,13 +1,10 @@
 <template>
   <v-text-field
-    flat
     v-model="searchQuery"
-    dense
     hide-details
-    prepend-inner-icon="mdi-magnify"
     placeholder="Поиск..."
-    style="width: 100%"
     :class="{ 'field-hover': isHover }"
+    rounded="lg"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >

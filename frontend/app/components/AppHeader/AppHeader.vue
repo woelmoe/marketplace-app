@@ -11,7 +11,7 @@
 
     <HeaderLogo />
 
-    <HeaderSearch v-if="!mobile" />
+    <HeaderSearch v-if="!mobile" style="width: 100%" />
 
     <v-spacer> </v-spacer>
     <ThemeToggle class="mr-2" />
