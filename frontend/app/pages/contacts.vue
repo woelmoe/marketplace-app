@@ -2,7 +2,7 @@
   <v-container class="contacts-page" max-width="1000">
     <h1 class="text-h4 mb-2">Контакты</h1>
     <p class="text-body-1 text-medium-emphasis mb-8">
-      Открыт к предложениям, сотрудничеству и интересным проектам.
+      Открыт к предложениям, сотрудничеству и интересным проектам!
     </p>
 
     <v-row>
