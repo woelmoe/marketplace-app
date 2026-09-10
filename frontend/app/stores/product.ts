@@ -6,6 +6,8 @@ export const useProductsStore = defineStore('products', () => {
   const currentProduct = ref<Product>()
   const isLoading = ref(false)
 
+  const cachedProducts = ref<Product[]>([])
+
   function setCurrentProduct(value: Product) {
     currentProduct.value = value
     const lsValue = JSON.stringify(value)
@@ -28,7 +30,8 @@ export const useProductsStore = defineStore('products', () => {
 
   // todo: пока что метод собирает все продукты каскадно. в будущем необходимо сделать пагинацию
   async function getAllProducts() {
-    products.value = []
+    products.value = cachedProducts.value
+
     isLoading.value = true
     let currentLoading = 1
     const limit = 50
@@ -48,6 +51,8 @@ export const useProductsStore = defineStore('products', () => {
       }
     }
 
+    cachedProducts.value = products.value.slice(0, 15)
+
     console.log(`Загружено ${products.value.length} товаров`)
     isLoading.value = false
   }
@@ -55,6 +60,7 @@ export const useProductsStore = defineStore('products', () => {
   return {
     isLoading,
     products,
+    cachedProducts,
     currentProduct,
     setCurrentProduct,
     getAllProducts,
