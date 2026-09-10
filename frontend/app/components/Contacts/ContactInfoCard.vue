@@ -11,9 +11,8 @@
 
     <v-divider class="my-4" />
 
-    <div class="text-caption text-medium-emphasis">
-      Отвечаю в течение рабочего дня. Для срочных вопросов — звонок.
-    </div>
+    <div class="text-caption text-label-medium">Холодняк Никита</div>
+    <div class="text-caption text-label-small">Fullstack-разработчик</div>
   </v-card>
 </template>
 
