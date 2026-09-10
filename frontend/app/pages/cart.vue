@@ -35,9 +35,6 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '~/stores/cart'
-import CartEmpty from '~/components/Carts/CartEmpty.vue'
-import CartItemsList from '~/components/Carts/CartItemsList.vue'
-import CartSummary from '~/components/Carts/CartSummary.vue'
 
 const cart = useCartStore()
 const router = useRouter()
